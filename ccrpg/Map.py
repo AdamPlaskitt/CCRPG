@@ -109,8 +109,8 @@ class Textures:
             self.texture = pygame.image.load(os.path.join("textures", "whiteTexture.gif"))
             self.texturerect = self.texture.get_rect()
 
-        def load_texture(self, x, y):
-            self.coords = (x, y)
+        def load_texture(self, x_pos, y_pos):
+            self.coords = (x_pos, y_pos)
             self.texturerect.move_ip(self.coords)
             window.blit(self.texture, self.texturerect)
 
@@ -128,21 +128,21 @@ def terminate():
 boss_list = [[20, 40, 60], [20, 40, 60], [0, 1, 1], [0, 1, 2]]
 
 
-def after_movement(playert_x, playert_y, boss_list):
+def after_movement(playert_x, playert_y, boss_list_movement):
     global php
     # x of boss, y of boss, 0 = one time only (the first time playert lands of square)
     # or 1 = repeate (repeate regarless of how many times playert lands on square), boss ID
-    if playert_x in boss_list[0]:  # check if x of playert is contaiend in x section of array
-        location_in_array = boss_list[0].index(
+    if playert_x in boss_list_movement[0]:  # check if x of playert is contaiend in x section of array
+        location_in_array = boss_list_movement[0].index(
             int(playert_x))  # if so then take the possition of that x value and save it
         # check the y value of the playert against the 2nd diminsion of the array to see if they match
-        if playert_y == boss_list[1][location_in_array]:
-            if boss_list[2][location_in_array] == 1:  # see if cordinates needs to be cleated
+        if playert_y == boss_list_movement[1][location_in_array]:
+            if boss_list_movement[2][location_in_array] == 1:  # see if cordinates needs to be cleated
                 # since only on first landing of sqaure does this need to happen then delete relevent parts of array
-                del boss_list[0][location_in_array]
-                del boss_list[1][location_in_array]
-                del boss_list[2][location_in_array]
-                del boss_list[3][location_in_array]
+                del boss_list_movement[0][location_in_array]
+                del boss_list_movement[1][location_in_array]
+                del boss_list_movement[2][location_in_array]
+                del boss_list_movement[3][location_in_array]
             p("boss square triggered")
             combat()
     espawn = random.randint(1, 20)
@@ -153,8 +153,8 @@ def after_movement(playert_x, playert_y, boss_list):
         php = player[0]
 
 
-def collision_detection(playert_x, playert_y, player):
-    playert_position = str((playert_x, playert_y, player[15]))
+def collision_detection(playert_x, playert_y, player_obj):
+    playert_position = str((playert_x, playert_y, player_obj[15]))
     cannot_go_onto = open("Blocked.txt").read().splitlines()
     p(cannot_go_onto)
     if playert_position in cannot_go_onto:
@@ -206,37 +206,37 @@ simple_katana = [60, 0, 0, 0, "Katana", 8, 0, "In the right hands this weapon is
                  0]
 
 
-def type_select(player_class):
+def type_select(player_obj):
     global player
-    player_class = str(player_class)
-    print(player_class)
-    if player_class == "barbarian":
+    player_obj = str(player_obj)
+    print(player_obj)
+    if player_obj == "barbarian":
         player = barbarian
-        image = pygame.image.load(os.path.join("textures", "barbarian.gid"))
-    elif player_class == "warrior":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "barbarian.gid"))
+    elif player_obj == "warrior":  # changed the if to an elif to cut down lag
         player = warrior
-        image = pygame.image.load(os.path.join("textures", "necromancer.png"))
-    elif player_class == "mage":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "necromancer.png"))
+    elif player_obj == "mage":  # changed the if to an elif to cut down lag
         player = mage
-        image = pygame.image.load(os.path.join("textures", "necromancer.png"))
-    elif player_class == "paladin":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "necromancer.png"))
+    elif player_obj == "paladin":  # changed the if to an elif to cut down lag
         player = paladin
-        image = pygame.image.load(os.path.join("textures", "necromancer.png"))
-    elif player_class == "necromancer":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "necromancer.png"))
+    elif player_obj == "necromancer":  # changed the if to an elif to cut down lag
         player = necromancer
-        image = pygame.image.load(os.path.join("textures", "necromancer.gif"))
-    elif player_class == "lancer":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "necromancer.gif"))
+    elif player_obj == "lancer":  # changed the if to an elif to cut down lag
         player = lancer
-        image = pygame.image.load(os.path.join("textures", "lancer.gif"))
-    elif player_class == "archer":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "lancer.gif"))
+    elif player_obj == "archer":  # changed the if to an elif to cut down lag
         player = archer
-        image = pygame.image.load(os.path.join("textures", "archer.gif"))
-    elif player_class == "samurai":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "archer.gif"))
+    elif player_obj == "samurai":  # changed the if to an elif to cut down lag
         player = samurai
-        image = pygame.image.load(os.path.join("textures", "necromancer.png"))
-    elif player_class == "ninja":  # changed the if to an elif to cut down lag
+        texture = pygame.image.load(os.path.join("textures", "necromancer.png"))
+    elif player_obj == "ninja":  # changed the if to an elif to cut down lag
         player = ninja
-        image = pygame.image.load(os.path.join("textures", "necromancer.png"))
+        texture = pygame.image.load(os.path.join("textures", "necromancer.png"))
     else:
         ctypes.windll.user32.MessageBoxW(
             0,
@@ -249,27 +249,27 @@ def type_select(player_class):
             classselect(classes)
     global map_number
     map_number = player[15]
-    return image
+    return texture
 
 
 global player, mana, mana_use
 
 
-def classselect(classes):
+def classselect(classes_to_select):
     global player, player_class, mana, mana_use
     print("What is you're name?")
-    name = str(input("my name is:"))
-    print("Choose you're class " + name)
-    print(classes)
+    name_inputed = str(input("my name is:"))
+    print("Choose you're class " + name_inputed)
+    print(classes_to_select)
     player_class = str(input())
     player_class = player_class.lower()
-    image = type_select(player_class)  # loads player array and image
-    player[7] = name
+    player_image = type_select(player_class)  # loads player array and image
+    player[7] = name_inputed
     mana = player[3] * 2
     mana_use = mana
     print(mana)
     print("Are you ready?")
-    return image
+    return player_image
 
 
 def levelupcheck():
@@ -353,7 +353,7 @@ enemy1 = [
 global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa, exp
 
 
-def statsetup(sakaretsu_armour, simple_katana):
+def statsetup(start_armour, start_weapon):
     global player
     if player[15] == 1:
         enemy = enemy1[random.randint(0, 12)]
@@ -371,8 +371,8 @@ def statsetup(sakaretsu_armour, simple_katana):
         pdex = player[2]
         pint = player[3]
         pstr = player[4]
-        pw = simple_katana
-        pa = sakaretsu_armour
+        pw = start_weapon
+        pa = start_armour
         return ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa, ename
 
 
@@ -422,7 +422,7 @@ def enemyturn():
 # -------------------------------------------------------------------------------
 def spell_image_blue_puff():
     count = 1
-    for i in range(10):
+    for index in range(10):
         # battle_ground = pygame.image.load(os.path.join("Combat","spells","blue_puff","blue_puff_"+str(count)+".gif"))
         count += 1
         # screen.blit(battle_ground, (300,150))
@@ -435,7 +435,7 @@ def spell_image_blue_puff():
 
 def attack_image_sword():
     count = 1
-    for i in range(20):
+    for index in range(20):
         # battle_ground = pygame.image.load(os.path.join("Combat","attacks","sword","sword_"+str(count)+".png"))
         count += 1
         # screen.blit(battle_ground, (300,150))
@@ -446,8 +446,8 @@ def attack_image_sword():
     pygame.display.flip()
 
 
-def attackgif(weapons):
-    if weapons == "sword":
+def attackgif(weapon_type):
+    if weapon_type == "sword":
         # attack_image_sword() comented as I dont have the sword.png file
         print("sword")
 
@@ -462,13 +462,13 @@ global pchoice
 
 
 # defining the players turn
-def playerturn(player):
+def playerturn(player_obj):
     global combatover
     global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa
     global pchoice
     # -------------------------------------------------------------------------------
     spell = ["Blue fire", 1, 40]
-    weapons = "sword"
+    weapons_type = "sword"
     # -------------------------------------------------------------------------------
     p("Choose your action:")
     p("attack, spell or run")
@@ -480,16 +480,16 @@ def playerturn(player):
     elif buttons == FALSE:
         pchoice = input()
     if pchoice == "attack":
-        attackgif(weapons)
+        attackgif(weapons_type)
         phit = pdex * random.randint(1, 4) - edex
         if phit > 0:
-            if player == lancer:
+            if player_obj == lancer:
                 playerhit = (pstr + pdex + pw[0]) - eend
-            elif player == archer:
+            elif player_obj == archer:
                 playerhit = (pw[0] + pdex + pstr / 2) - eend
-            elif player == samurai:
+            elif player_obj == samurai:
                 playerhit = (pw[0] + pdex) - eend
-            elif player == ninja:
+            elif player_obj == ninja:
                 playerhit = (pw[0] + pdex) - eend
             else:
                 playerhit = pw[0] + pstr - eend
@@ -582,7 +582,7 @@ def playerturn(player):
 
 
 # Running the actual turn
-def turn(player):
+def turn(player_obj):
     global combatover
     global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa
     if pw[8] == 1:
@@ -590,17 +590,17 @@ def turn(player):
         print("The enemy has " + str(ehp) + "health")
         print("Choose your action:")
         p("attack spell run")
-        pchoice = str(input())
-        if pchoice == "attack":
+        player_choice = str(input())
+        if player_choice == "attack":
             phit = pdex * random.randint(1, 4) - edex
             if phit > 0:
-                if player == lancer:
+                if player_obj == lancer:
                     playerhit = (pstr + pdex + pw[0]) - eend
-                elif player == archer:
+                elif player_obj == archer:
                     playerhit = (pw[0] + pdex + pstr / 2) - eend
-                elif player == samurai:
+                elif player_obj == samurai:
                     playerhit = (pw[0] + pdex) - eend
-                elif player == ninja:
+                elif player_obj == ninja:
                     playerhit = (pw[0] + pdex) - eend
                 else:
                     playerhit = pw[0] + pstr - eend
@@ -611,7 +611,7 @@ def turn(player):
                         enemyturn()
                     else:
                         print("The enemy has been slain")
-                        player[8][1] = player[8][1] + exp
+                        player_obj[8][1] = player_obj[8][1] + exp
                         levelupcheck()
                         combatover = True
                 else:
@@ -619,9 +619,9 @@ def turn(player):
             else:
                 print("You miss")
                 enemyturn()
-        elif pchoice == "spell":
+        elif player_choice == "spell":
             spellcheck()
-        elif pchoice == "run":
+        elif player_choice == "run":
             p("You try to run")
             run = random.randint(1, 10)
             if run < 3:
@@ -632,10 +632,10 @@ def turn(player):
     else:
         enemyturn()
         if php > 0:
-            playerturn(player)
+            playerturn(player_obj)
             if ehp <= 0:
                 p("The enemy is slain")
-                player[8][0] = player[8][0] + exp
+                player_obj[8][0] = player_obj[8][0] + exp
                 levelupcheck()
                 combatover = True
         else:
@@ -650,9 +650,9 @@ def combat():
     no_combat = [2, 3]  # maps where combat will not be triggered
     if player[15] not in no_combat and combat_on == 1:
         combatover = False
-        background = pygame.image.load(
+        background_image = pygame.image.load(
             os.path.join("backgrounds", "combat_area.gif"))  # load image for combat background
-        screen.blit(background, (0, 0))  # place this at 0,0
+        screen.blit(background_image, (0, 0))  # place this at 0,0
         you = pygame.image.load(os.path.join("combat", "you.gif"))  # load image for you
         screen.blit(you, (100, 200))  # place this at (100,200)
         enemy = pygame.image.load(os.path.join("combat", "enemy.gif"))  # load image for enemy
@@ -661,10 +661,10 @@ def combat():
         statsetup(sakaretsu_armour, simple_katana)
         while not combatover:
             turn(player)
-        map_name = "map" + str(player[15]) + ".gif"
-        background = pygame.image.load(
-            os.path.join("textures", map_name))  # when combat is finnished, load previous background
-        screen.blit(background, (0, 0))
+        map_gif = "map" + str(player[15]) + ".gif"
+        background_image = pygame.image.load(
+            os.path.join("textures", map_gif))  # when combat is finnished, load previous background
+        screen.blit(background_image, (0, 0))
 
 
 def app_():
@@ -741,21 +741,21 @@ def app_():
 
 # -----------------------------------------------------------------------------------
 # debug function
-def debug(message, player):
-    debug = open("log.txt", "a")
-    debug.write(str(time.strftime('%X %x %Z')))
-    debug.write(" ")
-    debug.write(str(player))
-    debug.write(" ")
-    debug.write(str(message))
-    debug.write("\n")
-    debug.close()
+def debug(message, player_obj):
+    debug_file = open("log.txt", "a")
+    debug_file.write(str(time.strftime('%X %x %Z')))
+    debug_file.write(" ")
+    debug_file.write(str(player_obj))
+    debug_file.write(" ")
+    debug_file.write(str(message))
+    debug_file.write("\n")
+    debug_file.close()
 
 
 # -----------------------------------------------------------------------------------
 def new_map(direction):
     global player, map_number
-    hight = 3  # the amount of vertical maps
+    height = 3  # the amount of vertical maps
     pygame.display.flip()  # suppost to update whole map
     if direction == "up":
         player[15] = player[15] + 1
@@ -772,31 +772,31 @@ def new_map(direction):
         else:
             player[15] = random.randint(2, 9)
     elif direction == "right":
-        player[15] = player[15] + hight
-        map_number += hight
-        player[15] = player[15] - hight
+        player[15] = player[15] + height
+        map_number += height
+        player[15] = player[15] - height
         if str(map_number) == "1":
             player[15] = 1
         else:
             player[15] = random.randint(2, 9)
     elif direction == "left":
-        player[15] = player[15] - hight
-        map_number -= hight
+        player[15] = player[15] - height
+        map_number -= height
         if str(map_number) == "1":
             player[15] = 1
         else:
             player[15] = random.randint(2, 9)
-    image_path = "map" + str(player[15]) + ".gif"
+    map_texture = "map" + str(player[15]) + ".gif"
     # check that a map file exisits, if not then display an error message.
     # Changing this to TRUE and moving to a new map will show the error message if you want to see it.
-    if os.path.isfile(image_path) == FALSE:
-        img = pygame.image.load("map_error.gif")
+    if os.path.isfile(map_texture) == FALSE:
+        error_texture = pygame.image.load("map_error.gif")
         # screen=pygame.display.set_mode((0,0))
-        screen.blit(img, (0, 0))
+        screen.blit(error_texture, (0, 0))
     else:
-        img = pygame.image.load(image_path)
+        error_texture = pygame.image.load(map_texture)
         # screen=pygame.display.set_mode((0,0))
-        screen.blit(img, (0, 0))
+        screen.blit(error_texture, (0, 0))
     p(message="area" & str(player[15]))
 
 
@@ -807,35 +807,36 @@ def text_objects(text, font, colour):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text, x, y, font_size, colour):
+def message_display(text, x_pos, y_pos, font_size, colour):
     largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
     TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
-    TextRect.center = (x, y)  # place text
+    TextRect.center = (x_pos, y_pos)  # place text
     screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
 
 
 # function for buttoms
-def button(msg, x, y, w, h, inactive_colour, active_colour, text_colour, name_of_function_to_call_when_clicked):
+def button(msg, x_pos, y_pos, w, h, inactive_colour, active_colour, text_colour, name_of_function_to_call_when_clicked):
     click = pygame.mouse.get_pressed()  # get mouse state (clicked/not clicked)
     mouse = pygame.mouse.get_pos()  # get mouse coords
     p(message="mouse2" + str(mouse))
-    if x + w > mouse[0] > x and y + h > mouse[1] > y:  # check if mouse is on button
-        pygame.draw.rect(screen, active_colour, (x, y, w, h))  # change to active colour
+    if x_pos + w > mouse[0] > x_pos and y_pos + h > mouse[1] > y_pos:  # check if mouse is on button
+        pygame.draw.rect(screen, active_colour, (x_pos, y_pos, w, h))  # change to active colour
         if click[0] == 1:  # check click (above if checks mouse is on button)
             name_of_function_to_call_when_clicked()  # do this when clicked (veriable needs not to have brackets)
     else:
-        pygame.draw.rect(screen, inactive_colour, (x, y, w, h))  # mouse not on button, switch to inactive colour
+        # mouse not on button, switch to inactive colour
+        pygame.draw.rect(screen, inactive_colour, (x_pos, y_pos, w, h))
 
     smallText = pygame.font.SysFont("freesansbold.ttf", 30)  # load font
     textSurf, textRect = text_objects(msg, smallText, text_colour)  # place text in button through text funtion
-    textRect.center = ((x + (w / 2)), (y + (h / 2)))  # location of text
+    textRect.center = ((x_pos + (w / 2)), (y_pos + (h / 2)))  # location of text
     screen.blit(textSurf, textRect)  # send to screen (but not update)
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 # pause function
 def pause():
-    pause = TRUE
+    pause_action = TRUE
     screen.fill(WHITE)  # fill background
     font = pygame.font.SysFont("comicsansm", 115)  # font (yes thats right :p)
     text = font.render("Paused", 1, (10, 10, 10))  # text to display
@@ -843,15 +844,15 @@ def pause():
     textpos.centerx = screen.get_rect().centerx  # position text
     screen.blit(text, textpos)
     pygame.display.flip()  # update display
-    while pause == TRUE:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+    while pause_action == TRUE:
+        for game_event in pygame.event.get():
+            if game_event.type == pygame.QUIT:
                 terminate()
                 pygame.display.quit
                 break
-            elif event.type == KEYDOWN:
+            elif game_event.type == KEYDOWN:
                 if key[pygame.K_p]:
-                    pause = FALSE
+                    pause_action = FALSE
                     p("unpasued")
 
 
@@ -905,9 +906,9 @@ def start_menu():
             button("quit to desktop", 300, 500, 150, 50, GREEN, DARKGREEN, BLACK, terminate)
             pygame.display.flip()
         time.sleep(0.1)
-    map_name = "map" + str(player[15]) + ".gif"
-    background = pygame.image.load(os.path.join("textures", map_name))
-    screen.blit(background, (0, 0))
+    map_gif = "map" + str(player[15]) + ".gif"
+    background_image = pygame.image.load(os.path.join("textures", map_gif))
+    screen.blit(background_image, (0, 0))
     pygame.display.flip()
 
 
@@ -945,57 +946,57 @@ def save():
     filename = str(save_name)
     if not os.path.exists(os.path.join("Saves", filename)):
         os.makedirs(os.path.join("Saves", filename))  # create folder
-    f = open(os.path.join("Saves", filename, "location.txt"), "w")
-    f.write(str(player_class))
-    f.write('\n')
-    f.write(str(player[15]))
-    f.write("\n")
-    f.write(str(playert.x))
-    f.write("\n")
-    f.write(str(playert.y))
-    f.write("\n")
-    f.write(str(player[7]))
-    f.close()
+    saves_file = open(os.path.join("Saves", filename, "location.txt"), "w")
+    saves_file.write(str(player_class))
+    saves_file.write('\n')
+    saves_file.write(str(player[15]))
+    saves_file.write("\n")
+    saves_file.write(str(playert.x))
+    saves_file.write("\n")
+    saves_file.write(str(playert.y))
+    saves_file.write("\n")
+    saves_file.write(str(player[7]))
+    saves_file.close()
     if not os.path.exists(os.path.join("Saves", filename, "money_s.txt")):
-        f = open(os.path.join("Saves", filename, "money_s.txt"), "w")
-        f.write("60")
+        saves_file = open(os.path.join("Saves", filename, "money_s.txt"), "w")
+        saves_file.write("60")
         money.append(60)
-        f.close
+        saves_file.close
     if not os.path.exists(os.path.join("Saves", filename, "money_m.txt")):
-        f = open(os.path.join("Saves", filename, "money_m.txt"), "w")
-        f.write("40")
+        saves_file = open(os.path.join("Saves", filename, "money_m.txt"), "w")
+        saves_file.write("40")
         money.append(40)
-        f.close
+        saves_file.close
     if not os.path.exists(os.path.join("Saves", filename, "money_l.txt")):
-        f = open(os.path.join("Saves", filename, "money_l.txt"), "w")
-        f.write("20")
+        saves_file = open(os.path.join("Saves", filename, "money_l.txt"), "w")
+        saves_file.write("20")
         money.append(20)
-        f.close
+        saves_file.close
     if not os.path.exists(os.path.join("Saves", filename, "money_x.txt")):
-        f = open(os.path.join("Saves", filename, "money_x.txt"), "w")
-        f.write("10")
+        saves_file = open(os.path.join("Saves", filename, "money_x.txt"), "w")
+        saves_file.write("10")
         money.append(10)
-        f.close
-    f = open(os.path.join("Saves", filename, "stats.txt"), "w")
-    f.write(str(player[0]))
-    f.write("\n")
-    f.write(str(player[1]))
-    f.write("\n")
-    f.write(str(player[2]))
-    f.write("\n")
-    f.write(str(player[3]))
-    f.write("\n")
-    f.write(str(player[4]))
-    f.write("\n")
-    f.write(str(player[8][0]))
-    f.write("\n")
-    f.write(str(player[8][1]))
-    f.write("\n")
-    f.write(str(player[8][2]))
-    f.write("\n")
-    f.write(str(mana))
-    f.write("\n")
-    f.write(str(mana_use))
+        saves_file.close
+    saves_file = open(os.path.join("Saves", filename, "stats.txt"), "w")
+    saves_file.write(str(player[0]))
+    saves_file.write("\n")
+    saves_file.write(str(player[1]))
+    saves_file.write("\n")
+    saves_file.write(str(player[2]))
+    saves_file.write("\n")
+    saves_file.write(str(player[3]))
+    saves_file.write("\n")
+    saves_file.write(str(player[4]))
+    saves_file.write("\n")
+    saves_file.write(str(player[8][0]))
+    saves_file.write("\n")
+    saves_file.write(str(player[8][1]))
+    saves_file.write("\n")
+    saves_file.write(str(player[8][2]))
+    saves_file.write("\n")
+    saves_file.write(str(mana))
+    saves_file.write("\n")
+    saves_file.write(str(mana_use))
 
 
 def load():
@@ -1008,8 +1009,10 @@ def load():
         folder = args.split("/")
         p(message="folder: " + str(folder[-1]))
 
-        f = open(os.path.join(args, "location.txt"), "r")
-        location = f.readlines()  # becomes an array, item 0 corosponds to line 1. Note that each item includes \n
+        loc_file = open(os.path.join(args, "location.txt"), "r")
+        location = loc_file.readlines()
+        # becomes an array, item 0 corosponds to line 1.
+        # Note that each item includes \n
         # .readlines seems to sometimes result in two different things, either ["x\n","\n","x\n","\n...
         # or ["x\n","x\n",x\n"... by detecting the length we can work out which one,
         # make sure to change this if you add new things to location.txt
@@ -1051,34 +1054,34 @@ def load():
             debug("data in array assitened from location.txt array is not 5 or 9 long")
             print("data in array assitened from location.txt array is not 5 or 9 long")
 
-        f.close()
-        f = open(os.path.join(args, "money_s.txt"), "r")
-        money.append(int(f.readline()))
-        f.close()
-        f = open(os.path.join(args, "money_m.txt"), "r")
-        money.append(int(f.readline()))
-        f.close()
-        f = open(os.path.join(args, "money_l.txt"), "r")
-        money.append(int(f.readline()))
-        f.close()
-        f = open(os.path.join(args, "money_x.txt"), "r")
-        money.append(int(f.readline()))
-        f.close()
+        loc_file.close()
+        loc_file = open(os.path.join(args, "money_s.txt"), "r")
+        money.append(int(loc_file.readline()))
+        loc_file.close()
+        loc_file = open(os.path.join(args, "money_m.txt"), "r")
+        money.append(int(loc_file.readline()))
+        loc_file.close()
+        loc_file = open(os.path.join(args, "money_l.txt"), "r")
+        money.append(int(loc_file.readline()))
+        loc_file.close()
+        loc_file = open(os.path.join(args, "money_x.txt"), "r")
+        money.append(int(loc_file.readline()))
+        loc_file.close()
 
-        f = open(os.path.join(args, "stats.txt"), "r")
-        player[0] = int(f.readline())
-        player[1] = int(f.readline())
-        player[2] = int(f.readline())
-        player[3] = int(f.readline())
-        player[4] = int(f.readline())
-        player[8][0] = int(f.readline())
-        player[8][1] = int(f.readline())
-        player[8][2] = int(f.readline())
+        loc_file = open(os.path.join(args, "stats.txt"), "r")
+        player[0] = int(loc_file.readline())
+        player[1] = int(loc_file.readline())
+        player[2] = int(loc_file.readline())
+        player[3] = int(loc_file.readline())
+        player[4] = int(loc_file.readline())
+        player[8][0] = int(loc_file.readline())
+        player[8][1] = int(loc_file.readline())
+        player[8][2] = int(loc_file.readline())
 
         screen.fill(WHITE)
-        map_name = "map" + str(player[15]) + ".gif"  # add back background after file is selected
-        background = pygame.image.load(os.path.join("textures", map_name))
-        screen.blit(background, (0, 0))
+        map_gif = "map" + str(player[15]) + ".gif"  # add back background after file is selected
+        background_image = pygame.image.load(os.path.join("textures", map_gif))
+        screen.blit(background_image, (0, 0))
         p(location)
         p(message="image" + player_class)
         menu_close()
@@ -1089,8 +1092,8 @@ def load():
         d = tix.DirSelectDialog(master=root, command=print_selected)
         d.popup()
 
-    button = Button(root, text="select file", command=path_select)
-    button.pack()
+    load_button = Button(root, text="select file", command=path_select)
+    load_button.pack()
 
     root.mainloop()
 
@@ -1149,75 +1152,83 @@ inventry = []
 # shop functions
 def is_number(to_check):
     if to_check.isdigit():
-        is_number = "TRUE"
+        is_numeric = "TRUE"
     else:
-        is_number = "FALSE"
-    return is_number
+        is_numeric = "FALSE"
+    return is_numeric
 
 
 def is_text(to_check):
     # Not yet used-thought it might be useful
     if to_check.isdigit():
-        is_number = "TRUE"
+        is_numeric = "TRUE"
     else:
-        is_number = "FALSE"
-    return is_number
+        is_numeric = "FALSE"
+    return is_numeric
 
 
-def money_reset(s_money, m_money, l_money, x_money, money):
-    money.remove(money[3])
-    money.remove(money[2])
-    money.remove(money[1])
-    money.remove(money[0])
-    money.append(s_money)
-    money.append(m_money)
-    money.append(l_money)
-    money.append(x_money)
+def money_reset(s_money, m_money, l_money, x_money, money_to_reset):
+    money_to_reset.remove(money_to_reset[3])
+    money_to_reset.remove(money_to_reset[2])
+    money_to_reset.remove(money_to_reset[1])
+    money_to_reset.remove(money_to_reset[0])
+    money_to_reset.append(s_money)
+    money_to_reset.append(m_money)
+    money_to_reset.append(l_money)
+    money_to_reset.append(x_money)
     message_display("Your account has been sucsesfuly updated", 400, 40, 16, WHITE)
     pygame.display.flip()
-    return money
+    return money_to_reset
 
 
-def change(money, type, amount):
-    if type == "S":
-        x_money = money[3]
-        l_money = money[2]
-        m_money = money[1]
-        s_money = amount
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "M":
-        x_money = money[3]
-        l_money = money[2]
-        m_money = amount
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "L":
-        x_money = money[3]
-        l_money = amount
-        m_money = money[1]
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "X":
-        x_money = amount
-        l_money = money[2]
-        m_money = money[1]
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
+def change(money_to_change, type_of_money, amount_to_change_to):
+    if type_of_money == "S":
+        x_money = money_to_change[3]
+        l_money = money_to_change[2]
+        m_money = money_to_change[1]
+        s_money = amount_to_change_to
+        money_reset(s_money, m_money, l_money, x_money, money_to_change)
+    elif type_of_money == "M":
+        x_money = money_to_change[3]
+        l_money = money_to_change[2]
+        m_money = amount_to_change_to
+        s_money = money_to_change[0]
+        money_reset(s_money, m_money, l_money, x_money, money_to_change)
+    elif type_of_money == "L":
+        x_money = money_to_change[3]
+        l_money = amount_to_change_to
+        m_money = money_to_change[1]
+        s_money = money_to_change[0]
+        money_reset(s_money, m_money, l_money, x_money, money_to_change)
+    elif type_of_money == "X":
+        x_money = amount_to_change_to
+        l_money = money_to_change[2]
+        m_money = money_to_change[1]
+        s_money = money_to_change[0]
+        money_reset(s_money, m_money, l_money, x_money, money_to_change)
     else:
         print("Error - money type not recognised. Use capital S,M,L or X only for type veriable")
-        return money
+        return money_to_change
 
 
-def amount(items, item_no):
+def amount(items_to_load, item_number):
     try:
-        if items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][11] == 0:
-            ret = items[item_no][12]
-        elif items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][12] == 0:
-            ret = items[item_no][11]
-        elif items[item_no][9] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-            ret = items[item_no][10]
-        elif items[item_no][10] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-            ret = items[item_no][9]
+        if (items_to_load[item_number][9] == 0
+                and items_to_load[item_number][10] == 0
+                and items_to_load[item_number][11] == 0):
+            ret = items_to_load[item_number][12]
+        elif (items_to_load[item_number][9] == 0
+              and items_to_load[item_number][10] == 0
+              and items_to_load[item_number][12] == 0):
+            ret = items_to_load[item_number][11]
+        elif (items_to_load[item_number][9] == 0
+              and items_to_load[item_number][11] == 0
+              and items_to_load[item_number][12] == 0):
+            ret = items_to_load[item_number][10]
+        elif (items_to_load[item_number][10] == 0
+              and items_to_load[item_number][11] == 0
+              and items_to_load[item_number][12] == 0):
+            ret = items_to_load[item_number][9]
         else:
             ret = "error"
         return ret
@@ -1225,44 +1236,44 @@ def amount(items, item_no):
         p("Tried to load too many items")
 
 
-def places(items, item_no):
+def places(items_places, item_num):
     try:
-        if items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][11] == 0:
-            place = "X"
-        elif items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][12] == 0:
-            place = "L"
-        elif items[item_no][9] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-            place = "M"
-        elif items[item_no][10] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-            place = "S"
+        if items_places[item_num][9] == 0 and items_places[item_num][10] == 0 and items_places[item_num][11] == 0:
+            placement = "X"
+        elif items_places[item_num][9] == 0 and items_places[item_num][10] == 0 and items_places[item_num][12] == 0:
+            placement = "L"
+        elif items_places[item_num][9] == 0 and items_places[item_num][11] == 0 and items_places[item_num][12] == 0:
+            placement = "M"
+        elif items_places[item_num][10] == 0 and items_places[item_num][11] == 0 and items_places[item_num][12] == 0:
+            placement = "S"
         else:
-            place = "error"
-        return place
+            placement = "error"
+        return placement
     except IndexError:
         print("Tried to load too many items")
 
 
-def equip_item(obj, name, pequip):
+def equip_item(obj, item_name, pequip):
     global armour, weapons
     if obj == 0:
-        weapons = name
+        weapons = item_name
         # Enter Addition To Stats (Waiting for finished weapons)
         screen.fill(BLACK)
-        message_display(currentHandItemMessage + str(name) + ".", 400, 20, 16, WHITE)
+        message_display(currentHandItemMessage + str(item_name) + ".", 400, 20, 16, WHITE)
         pygame.display.flip()
-        file = open(os.path.join("Saves", save_game_to_use, "equip0.txt"), "w")
-        file.write(str(pequip))
-        file.close()
+        saves_file = open(os.path.join("Saves", save_game_to_use, "equip0.txt"), "w")
+        saves_file.write(str(pequip))
+        saves_file.close()
         return weapons
     elif obj == 1:
-        armour = name
+        armour = item_name
         # endurance += int(armour[1])
         # screen.fill(BLACK)
-        message_display(currentArmourMessage + str(name) + ".", 400, 20, 16, WHITE)
+        message_display(currentArmourMessage + str(item_name) + ".", 400, 20, 16, WHITE)
         pygame.display.flip()
-        file = open(os.path.join("Saves", save_game_to_use, "equip1.txt"), "w")
-        file.write(str(pequip))
-        file.close()
+        saves_file = open(os.path.join("Saves", save_game_to_use, "equip1.txt"), "w")
+        saves_file.write(str(pequip))
+        saves_file.close()
         return armour
     elif obj == 2:
         screen.fill(BLACK)
@@ -1292,13 +1303,13 @@ def pinventory():
             message_display("Choose what you want to equip", 400, 40, 16, WHITE)
             pygame.display.flip()
             length1 = 0
-            y = 20  # y position of first print
+            y_pos = 20  # y position of first print
             screen.fill(BLACK)
             while length1 < len(inventry):
-                message_display("Item number " + str(length1) + " is " + inventry[length1][4], 400, y, 16, WHITE)
+                message_display("Item number " + str(length1) + " is " + inventry[length1][4], 400, y_pos, 16, WHITE)
                 pygame.display.flip()
                 length1 = length1 + 1
-                y = y + 20  # gap inbetween each print
+                y_pos = y_pos + 20  # gap inbetween each print
             pequip = input("Enter item number")
             try:
                 pequip = int(pequip)  # see if pequip is number
@@ -1324,18 +1335,18 @@ def pinventory():
         pygame.display.flip()
 
 
-def save_item(to_write):
-    file = open(os.path.join("Saves", save_game_to_use, "items.txt"), "a")
-    file.write(to_write)
-    file.write("\n")
-    file.close()
-    file = open(os.path.join("Saves", save_game_to_use, "amount.txt"), "r")
-    amount = int(file.readline())
-    file.close()
-    file = open(os.path.join("Saves", save_game_to_use, "amount.txt"), "w")
-    amount = int(amount) + 1
-    file.write(str(amount))
-    file.close()
+def save_item(obj):
+    saves_file = open(os.path.join("Saves", save_game_to_use, "items.txt"), "a")
+    saves_file.write(obj)
+    saves_file.write("\n")
+    saves_file.close()
+    saves_file = open(os.path.join("Saves", save_game_to_use, "amount.txt"), "r")
+    amount_read = int(saves_file.readline())
+    saves_file.close()
+    saves_file = open(os.path.join("Saves", save_game_to_use, "amount.txt"), "w")
+    amount_read = int(amount_read) + 1
+    saves_file.write(str(amount_read))
+    saves_file.close()
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1925,10 +1936,10 @@ while running:
                         pygame.display.flip()
 
                     elif instruction == "\\+money":
-                        type = input("Small, Medium, Large or Special")
+                        type_picked = input("Small, Medium, Large or Special")
                         amount = int(input("How much?"))
-                        if type == "S" or type == "M" or type == "L" or type == "X":
-                            change(money, type, amount)
+                        if type_picked == "S" or type_picked == "M" or type_picked == "L" or type_picked == "X":
+                            change(money, type_picked, amount)
                         else:
                             print("Enter capital: S,M,L or X only")
                     elif instruction == "\\shop":
@@ -1959,14 +1970,14 @@ while running:
                                                     16, WHITE)
                                     pygame.display.flip()
                                     price = (store[1][int(to_buy)])
-                                    type = store[2][int(to_buy)]
+                                    type_picked = store[2][int(to_buy)]
                                     if store[2][int(to_buy)] == "S":
                                         amount = money[0] - int(price)
                                         if amount < 0:
                                             message_display("You cannot afford that", 400, 60, 16, WHITE)
                                             pygame.display.flip()
                                         else:
-                                            change(money, type, amount)
+                                            change(money, type_picked, amount)
                                             inventry.append(items[int(to_buy)])
                                             save_item(to_buy)
                                             file = open(os.path.join("Saves", save_game_to_use, "money_s.txt"), "w")
@@ -1982,7 +1993,7 @@ while running:
                                             message_display("You cannot afford that", 400, 60, 16, WHITE)
                                             pygame.display.flip()
                                         else:
-                                            change(money, type, amount)
+                                            change(money, type_picked, amount)
                                             inventry.append(items[int(to_buy)])
                                             save_item(to_buy)
                                             file = open(os.path.join("Saves", save_game_to_use, "money_m.txt"), "w")
@@ -1998,7 +2009,7 @@ while running:
                                             message_display("You cannot afford that", 400, 60, 16, WHITE)
                                             pygame.display.flip()
                                         else:
-                                            change(money, type, amount)
+                                            change(money, type_picked, amount)
                                             inventry.append(items[int(to_buy)])
                                             save_item(to_buy)
                                             file = open(os.path.join("Saves", save_game_to_use, "money_l.txt"), "w")
@@ -2014,7 +2025,7 @@ while running:
                                             message_display("You cannot afford that", 400, 60, 16, WHITE)
                                             pygame.display.flip()
                                         else:
-                                            change(money, type, amount)
+                                            change(money, type_picked, amount)
                                             inventry.append(items[int(to_buy)])
                                             save_item(to_buy)
                                             file = open(os.path.join("Saves", save_game_to_use, "money_x.txt"), "w")
