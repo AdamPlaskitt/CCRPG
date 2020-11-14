@@ -1,5 +1,6 @@
-import random, pygame, time, sys
-from pygame.locals import *
+import pygame
+import time
+import sys
 
 FPS = 15
 WINDOWWIDTH = 640
