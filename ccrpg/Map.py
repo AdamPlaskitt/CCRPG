@@ -91,17 +91,17 @@ pygame.init()
 screen = pygame.display.set_mode((0, 0))
 
 
-class textures():
-    class playerTexture():
+class Textures():
+    class PlayerTexture():
         x = 0
         y = 0
 
-    class loadingTexture():
+    class LoadingTexture():
         def __init__(self):
             self.x = 0
             self.y = 0
 
-        def loadTexture(self, x, y):
+        def LoadTexture(self, x, y):
             self.texture = pygame.image.load(os.path.join("textures", "whiteTexture.gif"))
             self.texturerect = self.texture.get_rect()
             self.coords = (x, y)
@@ -109,7 +109,7 @@ class textures():
             window.blit(self.texture, self.texturerect)
 
 
-playert = textures.playerTexture()
+playert = Textures.PlayerTexture()
 
 
 # Closes The Window & Game
@@ -162,7 +162,7 @@ name = "x"
 global combatover
 
 
-class darkness:
+class Darkness:
     magnus = [100, 25, 15, 30, 20, ["The Sword of Darkness", 20], ["The Armour of Despair", 30],
               "Magnus, Captain of Despair", 60, 1, 0, 0, 0]
     boss = [1000000, 25000, 1500, 300, 2000, ["The Trident of Destruction", 10000], ["The Dark Ore Armor", 20000],
@@ -631,7 +631,7 @@ def turn(player, darkness):
 def combat():
     global combatover
     global player
-    statsetup(darkness, sakaretsu_armour, simple_katana)
+    statsetup(Darkness, sakaretsu_armour, simple_katana)
     no_combat = [2, 3]  # maps where combat will not be triggered
     if player[15] not in no_combat and combat_on == 1:
         combatover = False
@@ -647,9 +647,9 @@ def combat():
         enemy = pygame.image.load(os.path.join("combat", "enemy.gif"))  # load image for enemy
         screen.blit(enemy, (500, 100))  # place this at (500,100)
         pygame.display.flip()  # update screen
-        statsetup(darkness, sakaretsu_armour, simple_katana)
+        statsetup(Darkness, sakaretsu_armour, simple_katana)
         while combatover == False:
-            turn(player, darkness)
+            turn(player, Darkness)
         map_name = "map" + str(player[15]) + ".gif"
         background = pygame.image.load(
             os.path.join("textures", map_name))  # when combat is finnished, load previous background
