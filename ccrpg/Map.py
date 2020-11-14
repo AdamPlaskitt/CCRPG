@@ -100,10 +100,11 @@ class Textures():
         def __init__(self):
             self.x = 0
             self.y = 0
-
-        def load_texture(self, x, y):
+            self.coords = (x, y)
             self.texture = pygame.image.load(os.path.join("textures", "whiteTexture.gif"))
             self.texturerect = self.texture.get_rect()
+
+        def load_texture(self, x, y):
             self.coords = (x, y)
             self.texturerect.move_ip(self.coords)
             window.blit(self.texture, self.texturerect)
@@ -713,6 +714,9 @@ def app_():
             self.attack.pack({"side": "left"})
 
         def __init__(self, master=None):
+            self.run = None
+            self.spell = None
+            self.attack = None
             Frame.__init__(self, master)
             self.pack()
             self.create_widgets()
