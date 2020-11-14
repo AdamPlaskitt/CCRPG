@@ -1,9 +1,14 @@
 # Imports
-import pygame, random, time, os, ctypes, ast
-from pygame.locals import *
-from tkinter import *
 import tkinter.tix as tix
+from tkinter import *
+
+import ctypes
+import os
+import pygame
+import random
+import time
 import winsound
+from pygame.locals import *
 
 winsound.PlaySound("first song.wav", winsound.SND_ALIAS | winsound.SND_ASYNC)
 
