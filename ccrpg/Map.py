@@ -96,12 +96,12 @@ pygame.init()
 screen = pygame.display.set_mode((0, 0))
 
 
-class Textures():
-    class PlayerTexture():
+class Textures:
+    class PlayerTexture:
         x = 0
         y = 0
 
-    class LoadingTexture():
+    class LoadingTexture:
         def __init__(self):
             self.x = 0
             self.y = 0
@@ -810,7 +810,7 @@ def text_objects(text, font, colour):
 def message_display(text, x, y, font_size, colour):
     largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
     TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
-    TextRect.center = ((x), (y))  # place text
+    TextRect.center = (x, y)  # place text
     screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
 
 
@@ -1179,25 +1179,25 @@ def money_reset(s_money, m_money, l_money, x_money, money):
 
 
 def change(money, type, amount):
-    if type == ("S"):
+    if type == "S":
         x_money = money[3]
         l_money = money[2]
         m_money = money[1]
         s_money = amount
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("M"):
+    elif type == "M":
         x_money = money[3]
         l_money = money[2]
         m_money = amount
         s_money = money[0]
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("L"):
+    elif type == "L":
         x_money = money[3]
         l_money = amount
         m_money = money[1]
         s_money = money[0]
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("X"):
+    elif type == "X":
         x_money = amount
         l_money = money[2]
         m_money = money[1]
@@ -1917,21 +1917,21 @@ while running:
                 shop = 1
                 while shop == 1:
                     instruction = input("What would you like to do?")
-                    if instruction == ("\\money"):
+                    if instruction == "\\money":
                         screen.fill(BLACK)
                         message_display(
                             "small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(
                                 money[2]) + ", special orbs " + str(money[3]), 400, 30, 16, WHITE)
                         pygame.display.flip()
 
-                    elif instruction == ("\\+money"):
+                    elif instruction == "\\+money":
                         type = input("Small, Medium, Large or Special")
                         amount = int(input("How much?"))
                         if type == "S" or type == "M" or type == "L" or type == "X":
                             change(money, type, amount)
                         else:
                             print("Enter capital: S,M,L or X only")
-                    elif instruction == ("\\shop"):
+                    elif instruction == "\\shop":
                         loop = 0
                         y = 20
                         screen.fill(BLACK)
@@ -2036,7 +2036,7 @@ while running:
                             screen.fill(BLACK)
                             message_display("Please enter a number", 400, 20, 16, WHITE)
                             pygame.display.flip()
-                    elif instruction == ("\\data"):
+                    elif instruction == "\\data":
                         loop = 0
                         option = input("Weapons (1), armour (2) or cloths (3)")
                         option = int(option) - 1
@@ -2076,7 +2076,7 @@ while running:
                             screen.fill(BLACK)
                             message_display("Please enter numeric numbers only", 400, 20, 16, WHITE)
                             pygame.display.flip()
-                    elif instruction == ("\\help"):
+                    elif instruction == "\\help":
                         screen.fill(BLACK)
                         message_display("Availbe commands:", 400, 40, 16, WHITE)
                         message_display("\\shop = shop", 400, 60, 16, WHITE)
@@ -2086,9 +2086,9 @@ while running:
                         message_display("\\data = find out the statistics of an item", 400, 140, 16, WHITE)
                         message_display("\\exit = leave the shop", 400, 160, 16, WHITE)
                         pygame.display.flip()
-                    elif instruction == ("\\management"):
+                    elif instruction == "\\management":
                         pinventory()
-                    elif instruction == ("\\exit"):
+                    elif instruction == "\\exit":
                         shop = 0
                     else:
                         screen.fill(BLACK)
