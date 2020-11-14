@@ -101,7 +101,7 @@ class Textures():
             self.x = 0
             self.y = 0
 
-        def LoadTexture(self, x, y):
+        def load_texture(self, x, y):
             self.texture = pygame.image.load(os.path.join("textures", "whiteTexture.gif"))
             self.texturerect = self.texture.get_rect()
             self.coords = (x, y)
@@ -687,7 +687,7 @@ def app_():
             pchoice = "item"
             root.destroy()
 
-        def createWidgets(self):
+        def create_widgets(self):
             self.run = Button(self)
             self.run["text"] = "Run",
             self.run["command"] = self.say_hi
@@ -715,7 +715,7 @@ def app_():
         def __init__(self, master=None):
             Frame.__init__(self, master)
             self.pack()
-            self.createWidgets()
+            self.create_widgets()
 
     root.attributes("-topmost", False)
     return Application(master=root)
@@ -1068,11 +1068,11 @@ def load():
         pygame.display.flip()
         root.destroy()
 
-    def pathSelect():
+    def path_select():
         d = tix.DirSelectDialog(master=root, command=print_selected)
         d.popup()
 
-    button = Button(root, text="select file", command=pathSelect)
+    button = Button(root, text="select file", command=path_select)
     button.pack()
 
     root.mainloop()
@@ -1225,7 +1225,7 @@ def places(items, item_no):
         print("Tried to load too many items")
 
 
-def equipItem(obj, name, pequip):
+def equip_item(obj, name, pequip):
     global armour, weapons
     if obj == 0:
         weapons = name
@@ -1285,7 +1285,7 @@ def pinventory():
                 pequip = len(
                     inventry) + 1  # if not make a number which will be found to trigger Item not found alert bellow
             if pequip < len(inventry):
-                equipItem(inventry[pequip][6], inventry[pequip][4], pequip)
+                equip_item(inventry[pequip][6], inventry[pequip][4], pequip)
             else:
                 screen.fill(BLACK)
                 message_display("Item not found", 400, 40, 16, WHITE)
