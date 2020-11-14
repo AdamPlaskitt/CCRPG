@@ -129,8 +129,7 @@ def after_movement(playert_x, playert_y, boss_list):
     if playert_x in boss_list[0]:  # check if x of playert is contaiend in x section of array
         location_in_array = boss_list[0].index(
             int(playert_x))  # if so then take the possition of that x value and save it
-        if playert_y == boss_list[1][
-            location_in_array]:  # check the y value of the playert against the 2nd diminsion of the array to see if they match
+        if playert_y == boss_list[1][location_in_array]:  # check the y value of the playert against the 2nd diminsion of the array to see if they match
             if boss_list[2][location_in_array] == 1:  # see if cordinates needs to be cleated
                 del boss_list[0][
                     location_in_array]  # since only on first landing of sqaure does this need to happen then delete relevent parts of array
