@@ -81,7 +81,7 @@ cellHeight = int(windowHeight / cellSize)
 def p(message):
     global player
     """Printing function"""
-    if pr1nt == True:
+    if pr1nt:
         print(str(message))
     else:
         debug(message, player)
@@ -648,7 +648,7 @@ def combat():
         screen.blit(enemy, (500, 100))  # place this at (500,100)
         pygame.display.flip()  # update screen
         statsetup(Darkness, sakaretsu_armour, simple_katana)
-        while combatover == False:
+        while not combatover:
             turn(player, Darkness)
         map_name = "map" + str(player[15]) + ".gif"
         background = pygame.image.load(
@@ -1836,7 +1836,7 @@ while running:
             key = pygame.key.get_pressed()
             if key[pygame.K_DOWN] or key[pygame.K_s]:
                 movment_ok = collision_detection(playert.x, playert.y + cellSize, player)
-                if movment_ok == False:
+                if not movment_ok:
                     p("collision")
                 else:
                     if playert.y != 580:  # if play isnt at top of level
@@ -1848,7 +1848,7 @@ while running:
 
             elif key[pygame.K_UP] or key[pygame.K_w]:
                 movment_ok = collision_detection(playert.x, playert.y - cellSize, player)
-                if movment_ok == False:
+                if not movment_ok:
                     p("collision")
                 else:
                     if playert.y != 0:  # if play isnt at top of level
@@ -1860,7 +1860,7 @@ while running:
 
             elif key[pygame.K_RIGHT] or key[pygame.K_d]:
                 movment_ok = collision_detection(playert.x + cellSize, playert.y, player)
-                if movment_ok == False:
+                if not movment_ok:
                     p("collision")
                 else:
                     if playert.x != 780:  # if play isnt on the right most map
@@ -1872,7 +1872,7 @@ while running:
 
             elif key[pygame.K_LEFT] or key[pygame.K_a]:
                 movment_ok = collision_detection(playert.x - cellSize, playert.y, player)
-                if movment_ok == False:
+                if not movment_ok:
                     p("collision")
                 else:
                     if playert.x != 0:  # if play isnt on the left most map
