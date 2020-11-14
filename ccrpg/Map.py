@@ -130,14 +130,16 @@ boss_list = [[20, 40, 60], [20, 40, 60], [0, 1, 1], [0, 1, 2]]
 
 def after_movement(playert_x, playert_y, boss_list):
     global php
-    # x of boss, y of boss, 0 = one time only (the first time playert lands of square) or 1 = repeate (repeate regarless of how many times playert lands on square), boss ID
+    # x of boss, y of boss, 0 = one time only (the first time playert lands of square)
+    # or 1 = repeate (repeate regarless of how many times playert lands on square), boss ID
     if playert_x in boss_list[0]:  # check if x of playert is contaiend in x section of array
         location_in_array = boss_list[0].index(
             int(playert_x))  # if so then take the possition of that x value and save it
-        if playert_y == boss_list[1][location_in_array]:  # check the y value of the playert against the 2nd diminsion of the array to see if they match
+        # check the y value of the playert against the 2nd diminsion of the array to see if they match
+        if playert_y == boss_list[1][location_in_array]:
             if boss_list[2][location_in_array] == 1:  # see if cordinates needs to be cleated
-                del boss_list[0][
-                    location_in_array]  # since only on first landing of sqaure does this need to happen then delete relevent parts of array
+                # since only on first landing of sqaure does this need to happen then delete relevent parts of array
+                del boss_list[0][location_in_array]
                 del boss_list[1][location_in_array]
                 del boss_list[2][location_in_array]
                 del boss_list[3][location_in_array]
@@ -175,7 +177,8 @@ class Darkness:
 
 
 # list of classes and stats
-# vitality, endurance dexterity, intelligence, strength, weapon, auramor, name, exp, small orb, medium orb, large orb, mega orb, x cor, y cor, area
+# vitality, endurance dexterity, intelligence, strength, weapon, auramor, name, exp, small orb, medium orb, large orb,
+# mega orb, x cor, y cor, area
 # lancer is high attack, high dex, low defence, focused on killing the enemy very quickly
 lancer = [40, 30, 80, 10, 90, ["lance", 35], ["super_light_armour", 2], name, [0, 20, 1], 10, 0, 0, 0, 0, 0, 1]
 # archeris a ranged high dex class, it has a wide range of abilities, like befriend and forage
@@ -235,9 +238,11 @@ def type_select(player_class):
         player = ninja
         image = pygame.image.load(os.path.join("textures", "necromancer.png"))
     else:
-        ctypes.windll.user32.MessageBoxW(0,
-                                         "Error - player class entered or loaded incorrectly. You will now be promted to enter your name & player class",
-                                         "error", 0)
+        ctypes.windll.user32.MessageBoxW(
+            0,
+            "Error - player class entered or loaded incorrectly. " +
+            "You will now be promted to enter your name & player class",
+            "error", 0)
         print("Error - Player class entered incorectly.")
         player = "error"
         while player == "error":
@@ -251,13 +256,13 @@ global player, mana, mana_use
 
 
 def classselect(classes):
-    global player, player_class, mana, mana_use  # moved global from the if statments to the top to cut down on the ammount needed
+    global player, player_class, mana, mana_use
     print("What is you're name?")
     name = str(input("my name is:"))
     print("Choose you're class " + name)
     print(classes)
     player_class = str(input())
-    player_class = player_class.lower()  # added .lower() to make sure that the input was lowercase so it wasn't case sensitvie
+    player_class = player_class.lower()
     image = type_select(player_class)  # loads player array and image
     player[7] = name
     mana = player[3] * 2
@@ -638,8 +643,6 @@ def turn(player):
             combatover = True
 
 
-# image=classselect(classes,lancer,archer,necromancer,warrior,mage,paladin,barbarian,samurai,ninja) #un comment tp start set up (class ect. each time the game starts (before the menu))
-
 def combat():
     global combatover
     global player
@@ -652,10 +655,6 @@ def combat():
         screen.blit(background, (0, 0))  # place this at 0,0
         you = pygame.image.load(os.path.join("combat", "you.gif"))  # load image for you
         screen.blit(you, (100, 200))  # place this at (100,200)
-        # ------------------------------------------------------------------------------------------------------------------------------
-        #        battle_ground = pygame.image.load(os.path.join("combat","whiteTexture.gif")) #blank image for normal load
-        #        screen.blit(battle_ground, (300,150))
-        # ------------------------------------------------------------------------------------------------------------------------------
         enemy = pygame.image.load(os.path.join("combat", "enemy.gif"))  # load image for enemy
         screen.blit(enemy, (500, 100))  # place this at (500,100)
         pygame.display.flip()  # update screen
@@ -788,8 +787,9 @@ def new_map(direction):
         else:
             player[15] = random.randint(2, 9)
     image_path = "map" + str(player[15]) + ".gif"
-    if os.path.isfile(
-            image_path) == FALSE:  # check that a map file exisits, if not then display an error message. Changing this to TRUE and moving to a new map will show the error message if you want to see it.
+    # check that a map file exisits, if not then display an error message.
+    # Changing this to TRUE and moving to a new map will show the error message if you want to see it.
+    if os.path.isfile(image_path) == FALSE:
         img = pygame.image.load("map_error.gif")
         # screen=pygame.display.set_mode((0,0))
         screen.blit(img, (0, 0))
@@ -811,12 +811,10 @@ def message_display(text, x, y, font_size, colour):
     largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
     TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
     TextRect.center = ((x), (y))  # place text
-    # screen=pygame.display.set_mode((0,0)) uncomenting this lets fixes the screen not defined bug - but also causes problems displaying text if let uncommented.
     screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
 
 
 # function for buttoms
-# example syntax to call button("return",150,450,100,50,DARKGREEN,GREEN,BLACK,action) note the lack of brackets on action function.
 def button(msg, x, y, w, h, inactive_colour, active_colour, text_colour, name_of_function_to_call_when_clicked):
     click = pygame.mouse.get_pressed()  # get mouse state (clicked/not clicked)
     mouse = pygame.mouse.get_pos()  # get mouse coords
@@ -1012,8 +1010,10 @@ def load():
 
         f = open(os.path.join(args, "location.txt"), "r")
         location = f.readlines()  # becomes an array, item 0 corosponds to line 1. Note that each item includes \n
-        if len(
-                location) == 9:  # .readlines seems to sometimes result in two different things, either ["x\n","\n","x\n","\n... or ["x\n","x\n",x\n"... by detecting the length we can work out which one, make sure to change this if you add new things to location.txt
+        # .readlines seems to sometimes result in two different things, either ["x\n","\n","x\n","\n...
+        # or ["x\n","x\n",x\n"... by detecting the length we can work out which one,
+        # make sure to change this if you add new things to location.txt
+        if len(location) == 9:
             player_class = location[0]
             player_class = player_class[:-1]  # clear the last charector (\n)
             image = type_select(str(player_class))
@@ -1579,9 +1579,9 @@ samurai_yellow_armour = [55, 0, 45, 0, "yellow armour", 8, 1,
                          "an ancient set of yellow armour that once belonged to a visionary samurai", 0, 0, 10, 0, 0]
 samurai_red_armour = [0, 30, 0, 70, "red armour", 8, 1,
                       "an ancient set of red armour that once belonged to a crazy samurai", 0, 0, 10, 0, 0]
-samurai_battle_worn_armour = [50, 50, 50, 50, "old samurai armour", 8, 1,
-                              "battle-worn armour of deepest green, that once belonged to a legenadary samurai chancellor",
-                              0, 0, 20, 0, 0]
+samurai_battle_worn_armour = [
+    50, 50, 50, 50, "old samurai armour", 8, 1,
+    "battle-worn armour of deepest green, that once belonged to a legenadary samurai chancellor", 0, 0, 20, 0, 0]
 
 ninja_light_kyu_gi = [0, 150, 50, 0, "light kyu gi", 9, 1, "a light gi for ninjas", 0, 0, 20, 0, 0]
 ninja_heavy_kyu_gi = [0, 200, 0, 0, "heavy kyu gi", 9, 1, "a heavy gi for ninjas", 0, 0, 20, 0, 0]
@@ -2109,8 +2109,10 @@ while running:
                         map_number = 1
                         player[15] = 1
                         image_path = "map" + str(player[15]) + ".gif"
-                        if os.path.isfile(
-                                image_path) == FALSE:  # check that a map file exisits, if not then display an error message. Changing this to TRUE and moving to a new map will show the error message if you want to see it.
+                        # check that a map file exisits, if not then display an error message.
+                        # Changing this to TRUE and moving to a new map will show the error message if you want to
+                        # see it.
+                        if os.path.isfile(image_path) == FALSE:
                             img = pygame.image.load("map_error.gif")
                             # screen=pygame.display.set_mode((0,0))
                             screen.blit(img, (0, 0))
