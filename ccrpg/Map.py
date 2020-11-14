@@ -237,13 +237,13 @@ def type_select(player_class):
         print("Error - Player class entered incorectly.")
         player = "error"
         while player == "error":
-            classselect(classes, lancer, archer, necromancer, warrior, mage, paladin, barbarian, samurai, ninja)
+            classselect(classes)
     global map_number
     map_number = player[15]
     return image
 
 global player, mana, mana_use
-def classselect(classes, lancer, archer, necromancer, warrior, mage, paladin, barbarian, samurai, ninja):
+def classselect(classes):
     global player, player_class, mana, mana_use  # moved global from the if statments to the top to cut down on the ammount needed
     print("What is you're name?")
     name = str(input("my name is:"))
@@ -339,7 +339,7 @@ enemy1 = [
 ]
 
 global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa, exp
-def statsetup(darkness, sakaretsu_armour, simple_katana):
+def statsetup(sakaretsu_armour, simple_katana):
     global player
     if player[15] == 1:
         enemy = enemy1[random.randint(0, 12)]
@@ -362,7 +362,7 @@ def statsetup(darkness, sakaretsu_armour, simple_katana):
         return ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa, ename
 
 
-def spellcheck(player):
+def spellcheck():
     global ehp
     if player_class == "lancer":
         spell_power = random.randint(50, pdex + pstr)
@@ -446,7 +446,7 @@ def spellgif(spell):
 # -------------------------------------------------------------------------------
 global pchoice
 # defining the players turn
-def playerturn(player, darkness):
+def playerturn(player):
     global combatover
     global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa
     global pchoice
@@ -485,7 +485,7 @@ def playerturn(player, darkness):
         else:
             p("You miss")
     elif pchoice == "spell":
-        spellcheck(player)
+        spellcheck()
         # -------------------------------------------------------------------------------
         spellgif(spell)
     # -------------------------------------------------------------------------------
@@ -566,7 +566,7 @@ def playerturn(player, darkness):
 
 
 # Running the actual turn
-def turn(player, darkness):
+def turn(player):
     global combatover
     global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa
     if pw[8] == 1:
@@ -604,7 +604,7 @@ def turn(player, darkness):
                 print("You miss")
                 enemyturn()
         elif pchoice == "spell":
-            spellcheck(player)
+            spellcheck()
         elif pchoice == "run":
             p("You try to run")
             run = random.randint(1, 10)
@@ -616,7 +616,7 @@ def turn(player, darkness):
     else:
         enemyturn()
         if php > 0:
-            playerturn(player, darkness)
+            playerturn(player)
             if ehp <= 0:
                 p("The enemy is slain")
                 player[8][0] = player[8][0] + exp
@@ -632,7 +632,7 @@ def turn(player, darkness):
 def combat():
     global combatover
     global player
-    statsetup(Darkness, sakaretsu_armour, simple_katana)
+    statsetup(sakaretsu_armour, simple_katana)
     no_combat = [2, 3]  # maps where combat will not be triggered
     if player[15] not in no_combat and combat_on == 1:
         combatover = False
@@ -648,9 +648,9 @@ def combat():
         enemy = pygame.image.load(os.path.join("combat", "enemy.gif"))  # load image for enemy
         screen.blit(enemy, (500, 100))  # place this at (500,100)
         pygame.display.flip()  # update screen
-        statsetup(Darkness, sakaretsu_armour, simple_katana)
+        statsetup(sakaretsu_armour, simple_katana)
         while not combatover:
-            turn(player, Darkness)
+            turn(player)
         map_name = "map" + str(player[15]) + ".gif"
         background = pygame.image.load(
             os.path.join("textures", map_name))  # when combat is finnished, load previous background
@@ -743,7 +743,7 @@ def debug(message, player):
 
 
 # -----------------------------------------------------------------------------------
-def new_map(direction, playert):
+def new_map(direction):
     global player, map_number
     hight = 3  # the amount of vertical maps
     pygame.display.flip()  # suppost to update whole map
@@ -862,7 +862,7 @@ def new_game():
     print("menu removed")
     # menu1=FALSE
     menu_close()
-    image = classselect(classes, lancer, archer, necromancer, warrior, mage, paladin, barbarian, samurai, ninja)
+    image = classselect(classes)
     save()  # save a base copy of the game so that the deafult money and locations to load the save is created
 
 
@@ -1844,7 +1844,7 @@ while running:
                         playert.y += cellSize
                         after_movement(playert.x, playert.y, boss_list)
                     else:
-                        new_map("down", playert)  # load new map
+                        new_map("down")  # load new map
                         playert.y = 0  # move player to top for new map
 
             elif key[pygame.K_UP] or key[pygame.K_w]:
@@ -1856,7 +1856,7 @@ while running:
                         playert.y -= cellSize
                         after_movement(playert.x, playert.y, boss_list)
                     else:
-                        new_map("up", playert)  # load new map
+                        new_map("up")  # load new map
                         playert.y = 580  # move player to buttom for new map
 
             elif key[pygame.K_RIGHT] or key[pygame.K_d]:
@@ -1868,7 +1868,7 @@ while running:
                         playert.x += cellSize
                         after_movement(playert.x, playert.y, boss_list)
                     else:
-                        new_map("right", playert)  # load new map
+                        new_map("right")  # load new map
                         playert.x = 0  # move player to left for new map
 
             elif key[pygame.K_LEFT] or key[pygame.K_a]:
@@ -1880,7 +1880,7 @@ while running:
                         playert.x -= cellSize
                         after_movement(playert.x, playert.y, boss_list)
                     else:
-                        new_map("left", playert)  # load new map
+                        new_map("left")  # load new map
                         playert.x = 780  # move player to right for new map
             elif key[pygame.K_p]:
                 p("paused")
