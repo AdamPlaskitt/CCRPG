@@ -1917,21 +1917,21 @@ while running:
                 shop = 1
                 while shop == 1:
                     instruction = input("What would you like to do?")
-                    if instruction == ("\money"):
+                    if instruction == ("\\money"):
                         screen.fill(BLACK)
                         message_display(
                             "small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(
                                 money[2]) + ", special orbs " + str(money[3]), 400, 30, 16, WHITE)
                         pygame.display.flip()
 
-                    elif instruction == ("\+money"):
+                    elif instruction == ("\\+money"):
                         type = input("Small, Medium, Large or Special")
                         amount = int(input("How much?"))
                         if type == "S" or type == "M" or type == "L" or type == "X":
                             change(money, type, amount)
                         else:
                             print("Enter capital: S,M,L or X only")
-                    elif instruction == ("\shop"):
+                    elif instruction == ("\\shop"):
                         loop = 0
                         y = 20
                         screen.fill(BLACK)
@@ -2036,7 +2036,7 @@ while running:
                             screen.fill(BLACK)
                             message_display("Please enter a number", 400, 20, 16, WHITE)
                             pygame.display.flip()
-                    elif instruction == ("\data"):
+                    elif instruction == ("\\data"):
                         loop = 0
                         option = input("Weapons (1), armour (2) or cloths (3)")
                         option = int(option) - 1
@@ -2076,23 +2076,23 @@ while running:
                             screen.fill(BLACK)
                             message_display("Please enter numeric numbers only", 400, 20, 16, WHITE)
                             pygame.display.flip()
-                    elif instruction == ("\help"):
+                    elif instruction == ("\\help"):
                         screen.fill(BLACK)
                         message_display("Availbe commands:", 400, 40, 16, WHITE)
-                        message_display("\shop = shop", 400, 60, 16, WHITE)
-                        message_display("\money = see availbe orbs", 400, 80, 16, WHITE)
-                        message_display("\+money = change current money", 400, 100, 16, WHITE)
-                        message_display("\management = manage your inventory & equip items", 400, 120, 16, WHITE)
-                        message_display("\data = find out the statistics of an item", 400, 140, 16, WHITE)
-                        message_display("\exit = leave the shop", 400, 160, 16, WHITE)
+                        message_display("\\shop = shop", 400, 60, 16, WHITE)
+                        message_display("\\money = see availbe orbs", 400, 80, 16, WHITE)
+                        message_display("\\+money = change current money", 400, 100, 16, WHITE)
+                        message_display("\\management = manage your inventory & equip items", 400, 120, 16, WHITE)
+                        message_display("\\data = find out the statistics of an item", 400, 140, 16, WHITE)
+                        message_display("\\exit = leave the shop", 400, 160, 16, WHITE)
                         pygame.display.flip()
-                    elif instruction == ("\management"):
+                    elif instruction == ("\\management"):
                         pinventory()
-                    elif instruction == ("\exit"):
+                    elif instruction == ("\\exit"):
                         shop = 0
                     else:
                         screen.fill(BLACK)
-                        message_display("Error - command not recognised - uses \"\help\" for a list of instructions",
+                        message_display("Error - command not recognised - uses \"\\help\" for a list of instructions",
                                         400, 40, 16, WHITE)
                         pygame.display.flip()
                 map_name = "map" + str(player[15]) + ".gif"  # add back background after menu
