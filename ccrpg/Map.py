@@ -50,7 +50,7 @@ try:
         print("There was an error reading the options file - combat has been enabled.")
         combat_on = 1
     f.close()
-except:
+except IOError:
     print("There was an error reading the options file - combat has been enabled.")
     combat_on = 1
 
@@ -1221,7 +1221,7 @@ def amount(items, item_no):
         else:
             ret = "error"
         return ret
-    except:
+    except IndexError:
         p("Tried to load too many items")
 
 
@@ -1238,7 +1238,7 @@ def places(items, item_no):
         else:
             place = "error"
         return place
-    except:
+    except IndexError:
         print("Tried to load too many items")
 
 
@@ -1302,7 +1302,7 @@ def pinventory():
             pequip = input("Enter item number")
             try:
                 pequip = int(pequip)  # see if pequip is number
-            except:
+            except TypeError:
                 pequip = len(
                     inventry) + 1  # if not make a number which will be found to trigger Item not found alert bellow
             if pequip < len(inventry):
