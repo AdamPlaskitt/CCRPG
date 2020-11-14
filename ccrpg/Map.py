@@ -241,7 +241,7 @@ def type_select(player_class):
     map_number = player[15]
     return image
 
-
+global player, mana, mana_use
 def classselect(classes, lancer, archer, necromancer, warrior, mage, paladin, barbarian, samurai, ninja):
     global player, player_class, mana, mana_use  # moved global from the if statments to the top to cut down on the ammount needed
     print("What is you're name?")
@@ -337,7 +337,7 @@ enemy1 = [
     [150, 150, 200, 300, 40, ["Staff of light", 20], ["Holy light", 30], "Priest", 500, 0, 15, 0, 0],
 ]
 
-
+global ehp, eend, edex, eint, estr, php, pend, pdex, pint, pstr, pw, pa, exp
 def statsetup(darkness, sakaretsu_armour, simple_katana):
     global player
     if player[15] == 1:
@@ -443,7 +443,7 @@ def spellgif(spell):
 
 
 # -------------------------------------------------------------------------------
-
+global pchoice
 # defining the players turn
 def playerturn(player, darkness):
     global combatover
@@ -854,7 +854,7 @@ def menu_close():
     print("menu removed")
     menu1 = FALSE
 
-
+global menu1, image
 def new_game():
     global menu1, image
     print("menu removed")
@@ -920,7 +920,7 @@ def options():
             pygame.display.flip()
         time.sleep(0.1)
 
-
+global money
 def save():
     global player_class, mana, mana_use, money
     money = []
@@ -1252,7 +1252,8 @@ def equip_item(obj, name, pequip):
         message_display("clothing is not yet supported", 400, 20, 16, WHITE)
         pygame.display.flip()
 
-
+decide = None
+pdecide = None
 def pinventory():
     global inventry, decide, pdecide
     global armour, weapons
