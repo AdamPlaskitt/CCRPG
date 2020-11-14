@@ -747,7 +747,6 @@ def new_map(direction, playert):
     hight = 3  # the amount of vertical maps
     pygame.display.flip()  # suppost to update whole map
     if direction == "up":
-        move = player[15] / hight
         player[15] = player[15] + 1
         map_number += 1
         if str(map_number) == "1":
@@ -755,7 +754,6 @@ def new_map(direction, playert):
         else:
             player[15] = random.randint(2, 9)
     elif direction == "down":
-        move = (player[15] - 1) / hight
         player[15] = player[15] - 1
         map_number -= 1
         if str(map_number) == "1":
@@ -765,7 +763,6 @@ def new_map(direction, playert):
     elif direction == "right":
         player[15] = player[15] + hight
         map_number += hight
-        move = hight ** 2 - player[15]
         player[15] = player[15] - hight
         if str(map_number) == "1":
             player[15] = 1
@@ -1059,8 +1056,6 @@ def load():
         player[8][0] = int(f.readline())
         player[8][1] = int(f.readline())
         player[8][2] = int(f.readline())
-        mana = int(f.readline())
-        mana_use = int(f.readline())
 
         screen.fill(WHITE)
         map_name = "map" + str(player[15]) + ".gif"  # add back background after file is selected
