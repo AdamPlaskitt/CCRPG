@@ -663,53 +663,54 @@ def app_():
     root.focus_set()
     global pchoice
 
+    def say_hi():
+        global pchoice
+        print("Run")
+        pchoice = "run"
+        root.destroy()
+
+    def say_hi1():
+        global pchoice
+        print("Spell")
+        pchoice = "spell"
+        root.destroy()
+
+    def say_hi2():
+        global pchoice
+        print("Attack")
+        pchoice = "attack"
+        root.destroy()
+
+    def say_hi3():
+        global pchoice
+        print("Item")
+        pchoice = "item"
+        root.destroy()
+
     class Application(Frame):
-        def say_hi(self):
-            global pchoice
-            print("Run")
-            pchoice = "run"
-            root.destroy()
-
-        def say_hi1(self):
-            global pchoice
-            print("Spell")
-            pchoice = "spell"
-            root.destroy()
-
-        def say_hi2(self):
-            global pchoice
-            print("Attack")
-            pchoice = "attack"
-            root.destroy()
-
-        def say_hi3(self):
-            global pchoice
-            print("Item")
-            pchoice = "item"
-            root.destroy()
 
         def create_widgets(self):
             self.run = Button(self)
             self.run["text"] = "Run",
-            self.run["command"] = self.say_hi
+            self.run["command"] = say_hi
 
             self.run.pack({"side": "left"})
 
             self.spell = Button(self)
             self.spell["text"] = "Spell",
-            self.spell["command"] = self.say_hi1
+            self.spell["command"] = say_hi1
 
             self.spell.pack({"side": "left"})
 
             self.attack = Button(self)
             self.attack["text"] = "Attack",
-            self.attack["command"] = self.say_hi2
+            self.attack["command"] = say_hi2
 
             self.attack.pack({"side": "left"})
 
             self.attack = Button(self)
             self.attack["text"] = "Item",
-            self.attack["command"] = self.say_hi3
+            self.attack["command"] = say_hi3
 
             self.attack.pack({"side": "left"})
 
