@@ -873,7 +873,7 @@ def menu():
     menu1 = TRUE
     screen.fill(WHITE)  # fill screen white
     while menu1 == TRUE:
-        for event in pygame.event.get():
+        for _ in pygame.event.get():
             button("return to game", 300, 100, 150, 50, GREEN, DARKGREEN, BLACK, menu_close)
             button("save game", 300, 200, 150, 50, GREEN, DARKGREEN, BLACK, save)
             button("load game", 300, 300, 150, 50, GREEN, DARKGREEN, BLACK, load)
@@ -887,7 +887,7 @@ def start_menu():
     menu1 = TRUE
     screen.fill(WHITE)  # fill screen white
     while menu1 == TRUE:
-        for event in pygame.event.get():
+        for _ in pygame.event.get():
             button("new game", 300, 100, 150, 50, GREEN, DARKGREEN, BLACK, new_game)
             button("load game", 300, 200, 150, 50, GREEN, DARKGREEN, BLACK, load)
             button("options", 300, 300, 150, 50, GREEN, DARKGREEN, BLACK, options)
@@ -904,7 +904,7 @@ def start_menu():
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 def credit():
     while menu1 == TRUE:
-        for event in pygame.event.get():
+        for _ in pygame.event.get():
             screen.fill(WHITE)
             message_display("me-stuff", 400, 40, 16, BLACK)
             message_display("you-things", 400, 60, 16, BLACK)
@@ -915,7 +915,7 @@ def credit():
 
 def options():
     while menu1 == TRUE:
-        for event in pygame.event.get():
+        for _ in pygame.event.get():
             screen.fill(WHITE)
             message_display("You want to change things?", 400, 40, 16, BLACK)
             message_display("why on earth?", 400, 60, 16, BLACK)
