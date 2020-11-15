@@ -210,6 +210,7 @@ def type_select(player_obj):
     global player
     player_obj = str(player_obj)
     print(player_obj)
+    texture = None
     if player_obj == "barbarian":
         player = barbarian
         texture = pygame.image.load(os.path.join("textures", "barbarian.gid"))
