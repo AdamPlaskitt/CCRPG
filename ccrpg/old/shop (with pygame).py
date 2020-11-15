@@ -13,7 +13,8 @@
 # To do:
 # Converter
 
-# to use money_reset to change large: swap amount to others to change small/meduim and change large to money[2] and change type as required:
+# to use money_reset to change large:
+# swap amount to others to change small/meduim and change large to money[2] and change type as required:
 # Remerber system is not relative!! Use amount=money[2](1 for medium, 0 for small)-/+price change.
 # type=L
 # x_money=money[3]
@@ -326,7 +327,8 @@ global decide, pdecide
 
 
 def equip(t):
-    # t is needed as all functions when called by buttons are bassed a veriable. So it needs to have 1 when defined, even if unused.
+    # t is needed as all functions when called by buttons are bassed a veriable.
+    # So it needs to have 1 when defined, even if unused.
     global decide, pdecide
     print("equip")
     pdecide = "equip"
@@ -335,7 +337,8 @@ def equip(t):
 
 
 def unequip(t):
-    # t is needed as all functions when called by buttons are bassed a veriable. So it needs to have 1 when defined, even if unused.
+    # t is needed as all functions when called by buttons are bassed a veriable.
+    # So it needs to have 1 when defined, even if unused.
     global decide, pdecide
     print("unequip")
     pdecide = "unequip"
@@ -655,9 +658,9 @@ samurai_yellow_armour = [55, 0, 45, 0, "yellow armour", 8, 1,
                          "an ancient set of yellow armour that once belonged to a visionary samurai", 0, 0, 10, 0, 0]
 samurai_red_armour = [0, 30, 0, 70, "red armour", 8, 1,
                       "an ancient set of red armour that once belonged to a crazy samurai", 0, 0, 10, 0, 0]
-samurai_battle_worn_armour = [50, 50, 50, 50, "old samurai armour", 8, 1,
-                              "battle-worn armour of deepest green, that once belonged to a legenadary samurai chancellor",
-                              0, 0, 20, 0, 0]
+samurai_battle_worn_armour = [
+    50, 50, 50, 50, "old samurai armour", 8, 1,
+    "battle-worn armour of deepest green, that once belonged to a legenadary samurai chancellor", 0, 0, 20, 0, 0]
 
 ninja_light_kyu_gi = [0, 150, 50, 0, "light kyu gi", 9, 1, "a light gi for ninjas", 0, 0, 20, 0, 0]
 ninja_heavy_kyu_gi = [0, 200, 0, 0, "heavy kyu gi", 9, 1, "a heavy gi for ninjas", 0, 0, 20, 0, 0]
@@ -929,7 +932,8 @@ while 1 > 0:
     instruction = input("What would you like to do?")
     if instruction == ("\money"):
         screen.fill(BLACK)
-        # print("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(money[2]) + ", special orbs " +str(money[3]))
+        # print("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(money[2]) +
+        # ", special orbs " +str(money[3]))
         message_display("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(
             money[2]) + ", special orbs " + str(money[3]), 300, 30, 16, WHITE)
         pygame.display.flip()
@@ -1060,7 +1064,9 @@ while 1 > 0:
             print("Error - use capital S, M and L only")
     elif instruction == ("\help"):
         print(
-            "Availbe commands: \n \shop = shop \n \money = see availbe orbs \n \+money = change current money \n \management = manage your inventory & equip items. New way to see what you own. \n \data = find out the statistics of an item")
+            "Availbe commands: \n \shop = shop \n \money = see availbe orbs \n \+money = change current money \n "
+            "\management = manage your inventory & equip items. New way to see what you own. \n "
+            "\data = find out the statistics of an item")
     elif instruction == ("\management"):
         pinventory()
     else:
