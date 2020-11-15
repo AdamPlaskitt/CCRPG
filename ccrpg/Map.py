@@ -817,7 +817,7 @@ def message_display(text, x_pos, y_pos, font_size, colour):
 
 # function for buttoms
 def button(msg, x_pos, y_pos, w, h, inactive_colour, active_colour, text_colour, name_of_function_to_call_when_clicked):
-    click = pygame.mouse.get_pressed()  # get mouse state (clicked/not clicked)
+    click = pygame.mouse.get_pressed(num_buttons=1)  # get mouse state (clicked/not clicked)
     mouse = pygame.mouse.get_pos()  # get mouse coords
     p(message="mouse2" + str(mouse))
     if x_pos + w > mouse[0] > x_pos and y_pos + h > mouse[1] > y_pos:  # check if mouse is on button
