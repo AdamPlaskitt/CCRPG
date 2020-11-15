@@ -19,12 +19,12 @@
 """
 
 
-class darkness:
+class Darkness:
     magnus = [10, 25, 15, 30, 20, ["The sword of darkness", 20], ["The armour of despair", 30],
               "Magnus, captain of despair", 20, 1, 0, 0, 0]
 
 
-class water:
+class Water:
     sea_horse = [15, 10, 60, 9001, 0, ["splash", 0], ["sea_weed", 10], "Sea Horse", 10, 0, 1, 0, 0]
     dolphin = [20, 50, 30, 80, 40, ["tail", 30], ["fish bone exoskeleton", 20], "Dolphin", 40, 0, 1, 0, 0]
     fish = [10, 25, 15, 30, 20, ["flipper", 15], ["scales", 10], "Fish", 20, 1, 0, 0, 0]
@@ -34,19 +34,19 @@ class water:
                     3, 0, 0]
 
 
-class earth:
+class Earth:
     tree = [80, 80, 20, 10, 50, ["Branch", 20], ["Bark", 40], "Tree", 70, 0, 3, 0, 0]
     earth_wizard = [60, 60, 80, 120, 20, ["Staff of earth", 40], ["Rocks", 30], "Earth wizard", 200, 0, 6, 0, 0]
 
 
-class fire:
+class Fire:
     fire_bat = [30, 20, 60, 10, 40, ["fire wings", 30], ["Fire!!!", 20], "Fire bat", 40, 0, 5, 0, 0]
     fire_wizard = [90, 90, 120, 180, 30, ["Staff of fire", 20], ["magma", 50], "Fire wizard", 300, 0, 9, 0, 0]
 
 
-class air:
+class Air:
     air_wizard = [120, 120, 160, 240, 40, ["Staff of winds", 20], ["Air currents", 30], "Air wizard", 400, 0, 12, 0, 0]
 
 
-class heaven:
+class Heaven:
     priest = [150, 150, 200, 300, 40, ["Staff of light", 20], ["Holy light", 30], "Priest", 500, 0, 15, 0, 0]
