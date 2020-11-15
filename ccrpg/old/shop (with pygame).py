@@ -189,6 +189,7 @@ inventry = []
 
 
 def amount(items, item_no):
+    ret = None
     if items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][11] == 0:
         ret = items[item_no][12]
     elif items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][12] == 0:
@@ -197,8 +198,6 @@ def amount(items, item_no):
         ret = items[item_no][10]
     elif items[item_no][10] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
         ret = items[item_no][9]
-    else:
-        place = "error"
     return ret
 
 
@@ -363,7 +362,7 @@ def pinventory():
     pygame.display.flip()
     decide = 0
     while decide == 0:
-        for event in pygame.event.get():
+        for _ in pygame.event.get():
             button("equip", 300, 100, 150, 50, GREEN, DARKGREEN, BLACK, equip, "")
             button("unequip", 300, 200, 150, 50, GREEN, DARKGREEN, BLACK, unequip, "")
             pygame.display.flip()
@@ -382,7 +381,7 @@ def pinventory():
             screen.fill(BLACK)
             decide = 0
             while decide == 0:
-                for event in pygame.event.get():
+                for _ in pygame.event.get():
                     while length1 < len(inventry):
                         # print("item number",length,"is",inventry[length][4])
                         # message_display("item number "+str(length)+" is "+inventry[length][4],400,y,16,WHITE)
