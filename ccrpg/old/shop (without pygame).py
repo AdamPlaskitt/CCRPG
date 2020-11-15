@@ -13,7 +13,8 @@
 # To do:
 # Converter
 
-# to use money_reset to change large: swap amount to others to change small/meduim and change large to money[2] and change type as required:
+# to use money_reset to change large:
+# swap amount to others to change small/meduim and change large to money[2] and change type as required:
 # Remerber system is not relative!! Use amount=money[2](1 for medium, 0 for small)-/+price change.
 # type=L
 # x_money=money[3]
@@ -23,10 +24,11 @@
 # money_reset(s_money, m_money, l_money, x_money, money)
 
 import os
+import pygame
+import time
 
 save_game_to_use = "name test2"
 # save_game_to_use=os.path.join("Saves",save_game_to_use)
-import pygame, time
 
 # Colour Grid
 WHITE = (255, 255, 255)
