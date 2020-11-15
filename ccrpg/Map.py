@@ -839,7 +839,7 @@ def pause():
     pause_action = TRUE
     screen.fill(WHITE)  # fill background
     font = pygame.font.SysFont("comicsansm", 115)  # font (yes thats right :p)
-    text = font.render("Paused", 1, (10, 10, 10))  # text to display
+    text = font.render("Paused", True, (10, 10, 10))  # text to display
     textpos = text.get_rect()
     textpos.centerx = screen.get_rect().centerx  # position text
     screen.blit(text, textpos)
