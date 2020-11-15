@@ -797,21 +797,21 @@ def new_map(direction):
         error_texture = pygame.image.load(map_texture)
         # screen=pygame.display.set_mode((0,0))
         screen.blit(error_texture, (0, 0))
-    p(message="area" & str(player[15]))
+    p(message="area: " + str(player[15]))
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 # funtion to display text
 def text_objects(text, font, colour):
-    textSurface = font.render(text, True, colour)  # extact purpose unkown but seems to be needed
-    return textSurface, textSurface.get_rect()
+    text_surface = font.render(text, True, colour)  # extact purpose unkown but seems to be needed
+    return text_surface, text_surface.get_rect()
 
 
 def message_display(text, x_pos, y_pos, font_size, colour):
-    largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
-    TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
-    TextRect.center = (x_pos, y_pos)  # place text
-    screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
+    large_text = pygame.font.Font('freesansbold.ttf', font_size)  # load font
+    text_surf, text_rect = text_objects(text, large_text, colour)  # render text
+    text_rect.center = (x_pos, y_pos)  # place text
+    screen.blit(text_surf, text_rect)  # send to screen, needs to be updated/fliped to be worked
 
 
 # function for buttoms
@@ -827,10 +827,10 @@ def button(msg, x_pos, y_pos, w, h, inactive_colour, active_colour, text_colour,
         # mouse not on button, switch to inactive colour
         pygame.draw.rect(screen, inactive_colour, (x_pos, y_pos, w, h))
 
-    smallText = pygame.font.SysFont("freesansbold.ttf", 30)  # load font
-    textSurf, textRect = text_objects(msg, smallText, text_colour)  # place text in button through text funtion
-    textRect.center = ((x_pos + (w / 2)), (y_pos + (h / 2)))  # location of text
-    screen.blit(textSurf, textRect)  # send to screen (but not update)
+    small_text = pygame.font.SysFont("freesansbold.ttf", 30)  # load font
+    text_surf, text_rect = text_objects(msg, small_text, text_colour)  # place text in button through text funtion
+    text_rect.center = ((x_pos + (w / 2)), (y_pos + (h / 2)))  # location of text
+    screen.blit(text_surf, text_rect)  # send to screen (but not update)
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
