@@ -72,7 +72,7 @@ def draw_grid():
 def message_display(text, x, y, font_size, colour):
     largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
     TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
-    TextRect.center = ((x), (y))  # place text
+    TextRect.center = (x, y)  # place text
     # screen=pygame.display.set_mode((0,0))
     screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
 
@@ -138,25 +138,25 @@ def money_reset(s_money, m_money, l_money, x_money, money):
 
 
 def change(money, type, amount):
-    if type == ("S"):
+    if type == "S":
         x_money = money[3]
         l_money = money[2]
         m_money = money[1]
         s_money = amount
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("M"):
+    elif type == "M":
         x_money = money[3]
         l_money = money[2]
         m_money = amount
         s_money = money[0]
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("L"):
+    elif type == "L":
         x_money = money[3]
         l_money = amount
         m_money = money[1]
         s_money = money[0]
         money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == ("X"):
+    elif type == "X":
         x_money = amount
         l_money = money[2]
         m_money = money[1]
@@ -930,7 +930,7 @@ store.append(place)
 length = len(store[1])
 while 1 > 0:
     instruction = input("What would you like to do?")
-    if instruction == ("\\money"):
+    if instruction == "\\money":
         screen.fill(BLACK)
         # print("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(money[2]) +
         # ", special orbs " +str(money[3]))
@@ -938,14 +938,14 @@ while 1 > 0:
             money[2]) + ", special orbs " + str(money[3]), 300, 30, 16, WHITE)
         pygame.display.flip()
 
-    elif instruction == ("\\+money"):
+    elif instruction == "\\+money":
         type = input("Small, Medium, Large or Special")
         amount = int(input("How much?"))
         if type == "S" or type == "M" or type == "L" or type == "X":
             change(money, type, amount)
         else:
             print("Enter capital: S,M,L or X only")
-    elif instruction == ("\\shop"):
+    elif instruction == "\\shop":
         loop = 0
         while loop < length:
             # print("Item "+str(loop)+" - "+store[0][loop]+" costs "+store[1][loop]+" from obrb type "+store[2][loop])
@@ -1013,7 +1013,7 @@ while 1 > 0:
                 print("Error - item not recognised")
         else:
             print("Error - please enter a number, you have been returned to the main menu")
-    elif instruction == ("\\data"):
+    elif instruction == "\\data":
         loop = 0
         option = input(print("Weapons (1), armour (2) or cloths (3)"))
         option = int(option) - 1
@@ -1042,7 +1042,7 @@ while 1 > 0:
             # print("item number not found")
         else:
             print("please enter numeric numbers only")
-    elif instruction == ("\\convert"):
+    elif instruction == "\\convert":
         convert_f = input("Convert from (S,M or L)")
         if convert_f == "S":
             print("You can only convert downwards.")
@@ -1062,12 +1062,12 @@ while 1 > 0:
                 print("You don't have that many")
         else:
             print("Error - use capital S, M and L only")
-    elif instruction == ("\\help"):
+    elif instruction == "\\help":
         print(
             "Availbe commands: \n \\shop = shop \n \\money = see availbe orbs \n \\+money = change current money \n "
             "\\management = manage your inventory & equip items. New way to see what you own. \n "
             "\\data = find out the statistics of an item")
-    elif instruction == ("\\management"):
+    elif instruction == "\\management":
         pinventory()
     else:
         print("Error - command not recognised - uses \"\\help\" for a list of instructions.")
