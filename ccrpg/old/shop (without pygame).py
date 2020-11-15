@@ -919,10 +919,7 @@ while item_no < len(items):
     item_no = item_no + 1
     place.append(places1)
 
-store = []
-store.append(shop)
-store.append(prices)
-store.append(place)
+store = [shop, prices, place]
 # print(store)
 
 # length of shop
