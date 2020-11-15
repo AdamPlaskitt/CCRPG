@@ -105,14 +105,14 @@ class Textures:
         def __init__(self):
             self.x = 0
             self.y = 0
-            self.coords = (x, y)
+            self.coords = (self.x, self.y)
             self.texture = pygame.image.load(os.path.join("textures", "whiteTexture.gif"))
             self.texturerect = self.texture.get_rect()
 
         def load_texture(self, x_pos, y_pos):
             self.coords = (x_pos, y_pos)
             self.texturerect.move_ip(self.coords)
-            window.blit(self.texture, self.texturerect)
+            screen.blit(self.texture, self.texturerect)
 
 
 playert = Textures.PlayerTexture()
@@ -381,7 +381,7 @@ def spellcheck():
     if player_class == "lancer":
         spell_power = random.randint(50, pdex + pstr)
     elif player_class == "archer":
-        spell_power = randomm.randint(40, pdex + pstr / 2)
+        spell_power = random.randint(40, pdex + pstr / 2)
     elif player_class == "mage":
         spell_power = random.randint(70, pint)
     elif player_class == "ninja":
@@ -389,7 +389,7 @@ def spellcheck():
     elif player_class == "paladin":
         spell_power = random.randint(0, pend)
     else:
-        spell_power = randomm.randint(30, pint)
+        spell_power = random.randint(30, pint)
     ehp = ehp - spell_power
 
 
@@ -516,7 +516,7 @@ def playerturn(player_obj):
         elif itemchoice == 'priest_band' and priest_band in items:
             randomthingy = random.randint(-20, 80)
             php = php + randomthingy
-        elif itemchoice == 'fire_gem_ciclet' and fire_gem_circlet in items:
+        elif itemchoice == 'fire_gem_ciclet' and Fire_gem_circlet in items:
             pdex = pdex + 50
             pint = pint + 150
         elif itemchoice == 'major_ring' and major_ring in items:
@@ -525,7 +525,7 @@ def playerturn(player_obj):
             pdex = pdex + 50
             pint = pint + 50
             print('its over 9000')
-        elif itemchoice == 'binding_cranium_crab' and binding_cranium_crab in items:
+        elif itemchoice == 'binding_cranium_crab' and blinding_cranium_crab in items:
             edex = edex - 27
         elif itemchoice == 'swiss_army_claymore' and swiss_army_claymore in items:
             pstr = pstr + 200
@@ -537,7 +537,7 @@ def playerturn(player_obj):
             pdex = pdex + 1000
             pint = pint + 1000
             items.remove(overpowered_stick)
-        elif itemchoice == 'boss_sheild' and boss_sheild in items:
+        elif itemchoice == 'boss_sheild' and boss_shield in items:
             estr = estr - 50
         elif itemchoice == 'sleepy_stick' and sleepy_stick in items:
             vairable1 = random.randint(1, 10)
@@ -551,7 +551,7 @@ def playerturn(player_obj):
         elif itemchoice == 'necrotic_bone' and necrotic_bone in items:
             ehp = ehp + 50
         elif itemchoice == 'ring_of_random_change' and ring_of_random_change in items:
-            vairable1 = randint(0, 4)
+            vairable1 = random.randint(0, 4)
             if vairable1 == 0:
                 ehp = 0
                 print('congratulations, it killed your enemy!!!!!!!!!!')
