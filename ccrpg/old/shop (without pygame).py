@@ -54,6 +54,8 @@ cellHeight = int(windowHeight / cellSize)
 pygame.init()
 screen = pygame.display.set_mode((0, 0))
 
+global window
+
 
 def draw_grid():
     global window
@@ -318,6 +320,9 @@ def un_equip_item(obj):
         weapon = " "
         # Enter Reverse Stats of Weapon (Waiting for finished weapons)
         print(unEquipWeaponMessage)
+
+
+global decide, pdecide
 
 
 def equip(t):
