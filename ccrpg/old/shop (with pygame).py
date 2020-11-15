@@ -23,10 +23,11 @@
 # money_reset(s_money, m_money, l_money, x_money, money)
 
 import os
+import pygame
+import time
 
 save_game_to_use = "name test2"
 # save_game_to_use=os.path.join("Saves",save_game_to_use)
-import pygame, time
 
 # Colour Grid
 WHITE = (255, 255, 255)
