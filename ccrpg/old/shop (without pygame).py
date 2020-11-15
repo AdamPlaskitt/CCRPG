@@ -55,7 +55,7 @@ pygame.init()
 screen = pygame.display.set_mode((0, 0))
 
 
-def drawGrid():
+def draw_grid():
     global window
     window = pygame.display.set_mode((windowWidth, windowHeight))
     for x in range(0, windowWidth, cellSize):  # draw vertical lines
@@ -97,7 +97,7 @@ def button(msg, x, y, w, h, inactive_colour, active_colour, text_colour, name_of
     screen.blit(textSurf, textRect)  # send to screen (but not update)
 
 
-drawGrid()
+draw_grid()
 screen.fill(BLACK)
 pygame.display.update()
 
@@ -249,7 +249,7 @@ second function at a later date.) <-- Not applicable to pickUpItem()
 
 
 # Function for putting an item into the inventory.
-def pickUpItem(obj):
+def pick_up_item(obj):
     global armour, weapons
     if obj[5] == "clothing":
         clothing.insert(obj[4])
@@ -266,7 +266,7 @@ def pickUpItem(obj):
 
 
 # Function for removing an item from the inventory (& at the moment, removing said item from game)
-def dropItem(obj):
+def drop_item(obj):
     global armour, weapons
     if obj[5] == 0:
         weapons.remove(obj[4])
@@ -279,7 +279,7 @@ def dropItem(obj):
 
 
 # Function for equipping an item e.g Sword into your hand/Put on armour
-def equipItem(obj, name, pequip):
+def equip_item(obj, name, pequip):
     global armour, weapons
     if obj == 0:
         weapons = name
@@ -304,7 +304,7 @@ def equipItem(obj, name, pequip):
 
 
 # Function to unequip yet keep in inventory
-def unEquipItem(obj):
+def un_equip_item(obj):
     # not used
     global armour, weapons
     if obj == 1:
@@ -341,7 +341,7 @@ def unequip(t):
 def item_to_eqip(length):
     global decide
     print(length)
-    equipItem(inventry[length][6], inventry[length][4], length)
+    equip_item(inventry[length][6], inventry[length][4], length)
     decide = 1
     return decide
 
@@ -889,11 +889,11 @@ file = open(os.path.join("Saves", save_game_to_use, "equip0.txt"), "r")
 pequip = int(file.readline())
 print(pequip)
 print(inventry)
-equipItem(inventry[pequip][6], inventry[pequip][4], pequip)
+equip_item(inventry[pequip][6], inventry[pequip][4], pequip)
 file.close()
 file = open(os.path.join("Saves", save_game_to_use, "equip0.txt"), "r")
 pequip = int(file.readline())
-equipItem(inventry[pequip][6], inventry[pequip][4], pequip)
+equip_item(inventry[pequip][6], inventry[pequip][4], pequip)
 file.close()
 
 prices = []
