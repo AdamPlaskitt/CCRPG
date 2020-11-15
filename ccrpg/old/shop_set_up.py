@@ -1,4 +1,5 @@
-# this file is designed to go with the shop file and will create the files needed in the correct places. This will also re-set the items and money bought.
+# this file is designed to go with the shop file and will create the files needed in the correct places.
+# This will also re-set the items and money bought.
 f = open("money_s.txt", "w")
 f.write("60")
 f.close()
