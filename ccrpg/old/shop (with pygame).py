@@ -25,7 +25,7 @@
 import os
 
 save_game_to_use = "name test2"
-##save_game_to_use=os.path.join("Saves",save_game_to_use)
+# save_game_to_use=os.path.join("Saves",save_game_to_use)
 import pygame, time
 
 # Colour Grid
@@ -292,7 +292,7 @@ def equip_item(obj, name, pequip):
         return weapons
     elif obj == 1:
         armour = name
-        ##endurance += int(armour[1])
+        # endurance += int(armour[1])
         print(currentArmourMessage + str(name) + ".")
         file = open(os.path.join("Saves", save_game_to_use, "equip1.txt"), "w")
         file.write(str(pequip))
@@ -311,14 +311,15 @@ def un_equip_item(obj):
     if obj == 1:
         # Resets name of current armour & resets the appropriate stats.
         armour = " "
-        ##endurance -= obj[1]
-        ##dexterity -= obj[2]
+        # endurance -= obj[1]
+        # dexterity -= obj[2]
         print(unEquipArmourMessage)
 
     elif obj == 0:
         weapon = " "
         # Enter Reverse Stats of Weapon (Waiting for finished weapons)
         print(unEquipWeaponMessage)
+
 
 global decide, pdecide
 
@@ -353,10 +354,10 @@ def pinventory():
     global inventry, decide, pdecide
     global armour, weapons
     print(currentHandItemMessage + str(weapons))
-    ##print("You are currently wearing: " + str(armour))
-    ##print("Your options are:")
+    # print("You are currently wearing: " + str(armour))
+    # print("Your options are:")
     screen.fill(BLACK)
-    ##print("unequip equip")
+    # print("unequip equip")
     message_display("You are currently wearing: " + str(armour) + ". Your options are: unequip or equip", 400, 40, 16,
                     WHITE)
     pygame.display.flip()
@@ -393,13 +394,13 @@ def pinventory():
                     length1 = 0
                     y = 0
                 time.sleep(0.1)
-            ##pequip = input("Enter item number")
-            ##pequip = int(pequip)
-    ##            if pequip<len(inventry):
-    ##                print(inventry)
-    ##                equipItem(inventry[pequip][6],inventry[pequip][4],pequip)
-    ##            else:
-    ##                print("item not found")
+            # pequip = input("Enter item number")
+            # pequip = int(pequip)
+    # if pequip<len(inventry):
+    # print(inventry)
+    # equipItem(inventry[pequip][6],inventry[pequip][4],pequip)
+    # else:
+    # print("item not found")
     if pdecide == "unequip":
         armour = ""
         weapons = ""
@@ -927,7 +928,7 @@ while 1 > 0:
     instruction = input("What would you like to do?")
     if instruction == ("\money"):
         screen.fill(BLACK)
-        ##print("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(money[2]) + ", special orbs " +str(money[3]))
+        # print("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(money[2]) + ", special orbs " +str(money[3]))
         message_display("small orbs " + str(money[0]) + ", medium orbs " + str(money[1]) + ", large orbs " + str(
             money[2]) + ", special orbs " + str(money[3]), 300, 30, 16, WHITE)
         pygame.display.flip()
@@ -1019,7 +1020,7 @@ while 1 > 0:
         check = is_number(to_buy)  # check user has entered a number
         # check="TRUE" #uncomment to accept letters
         if check == "TRUE":
-            ##if int(to_buy)<len(item): #check item exists
+            # if int(to_buy)<len(item): #check item exists
             print("item number not found")
             print("You have requested data on ", store[0][int(to_buy)])
             print("Strength = ", items[int(to_buy)][0])
@@ -1032,8 +1033,8 @@ while 1 > 0:
             # 7 used for description, placed at end
             print("Range = ", items[int(to_buy)][8])
             print("Bellow is a description of the item: \n,", items[int(to_buy)][7])
-            ##else:
-            ##print("item number not found")
+            # else:
+            # print("item number not found")
         else:
             print("please enter numeric numbers only")
     elif instruction == ("\convert"):
