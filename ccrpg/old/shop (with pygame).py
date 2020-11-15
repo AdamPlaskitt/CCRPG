@@ -70,16 +70,16 @@ def draw_grid():
 
 
 def message_display(text, x, y, font_size, colour):
-    largeText = pygame.font.Font('freesansbold.ttf', font_size)  # load font
-    TextSurf, TextRect = text_objects(text, largeText, colour)  # render text
-    TextRect.center = (x, y)  # place text
+    large_text = pygame.font.Font('freesansbold.ttf', font_size)  # load font
+    text_surf, text_rect = text_objects(text, large_text, colour)  # render text
+    text_rect.center = (x, y)  # place text
     # screen=pygame.display.set_mode((0,0))
-    screen.blit(TextSurf, TextRect)  # send to screen, needs to be updated/fliped to be worked
+    screen.blit(text_surf, text_rect)  # send to screen, needs to be updated/fliped to be worked
 
 
 def text_objects(text, font, colour):
-    textSurface = font.render(text, True, colour)  # extact purpose unkown but seems to be needed
-    return textSurface, textSurface.get_rect()
+    text_surface = font.render(text, True, colour)  # extact purpose unkown but seems to be needed
+    return text_surface, text_surface.get_rect()
 
 
 def button(msg, x, y, w, h, inactive_colour, active_colour, text_colour, name_of_function_to_call_when_clicked,
@@ -95,10 +95,10 @@ def button(msg, x, y, w, h, inactive_colour, active_colour, text_colour, name_of
     else:
         pygame.draw.rect(screen, inactive_colour, (x, y, w, h))  # mouse not on button, switch to inactive colour
 
-    smallText = pygame.font.Font("freesansbold.ttf", 20)  # load font
-    textSurf, textRect = text_objects(msg, smallText, text_colour)  # place text in button through text funtion
-    textRect.center = ((x + (w / 2)), (y + (h / 2)))  # location of text
-    screen.blit(textSurf, textRect)  # send to screen (but not update)
+    small_text = pygame.font.Font("freesansbold.ttf", 20)  # load font
+    text_surf, text_rect = text_objects(msg, small_text, text_colour)  # place text in button through text funtion
+    text_rect.center = ((x + (w / 2)), (y + (h / 2)))  # location of text
+    screen.blit(text_surf, text_rect)  # send to screen (but not update)
 
 
 draw_grid()
