@@ -318,7 +318,6 @@ def un_equip_item(obj):
         print(unEquipArmourMessage)
 
     elif obj == 0:
-        weapon = " "
         # Enter Reverse Stats of Weapon (Waiting for finished weapons)
         print(unEquipWeaponMessage)
 
