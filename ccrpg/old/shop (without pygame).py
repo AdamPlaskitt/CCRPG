@@ -109,62 +109,62 @@ pygame.display.update()
 # error checking
 def is_number(to_check):
     if to_check.isdigit():
-        is_number = "TRUE"
+        is_numeric = "TRUE"
     else:
-        is_number = "FALSE"
-    return is_number
+        is_numeric = "FALSE"
+    return is_numeric
 
 
 def is_text(to_check):
     # Not yet used-thought it might be useful
     if to_check.isdigit():
-        is_number = "TRUE"
+        is_numeric = "TRUE"
     else:
-        is_number = "FALSE"
-    return is_number
+        is_numeric = "FALSE"
+    return is_numeric
 
 
-def money_reset(s_money, m_money, l_money, x_money, money):
-    money.remove(money[3])
-    money.remove(money[2])
-    money.remove(money[1])
-    money.remove(money[0])
-    money.append(s_money)
-    money.append(m_money)
-    money.append(l_money)
-    money.append(x_money)
+def money_reset(s_money_type, m_money_type, l_money_type, x_money_type, money_original):
+    money_original.remove(money_original[3])
+    money_original.remove(money_original[2])
+    money_original.remove(money_original[1])
+    money_original.remove(money_original[0])
+    money_original.append(s_money_type)
+    money_original.append(m_money_type)
+    money_original.append(l_money_type)
+    money_original.append(x_money_type)
     print("Succsesful money change")
-    return money
+    return money_original
 
 
-def change(money, type, amount):
-    if type == "S":
-        x_money = money[3]
-        l_money = money[2]
-        m_money = money[1]
-        s_money = amount
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "M":
-        x_money = money[3]
-        l_money = money[2]
-        m_money = amount
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "L":
-        x_money = money[3]
-        l_money = amount
-        m_money = money[1]
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
-    elif type == "X":
-        x_money = amount
-        l_money = money[2]
-        m_money = money[1]
-        s_money = money[0]
-        money_reset(s_money, m_money, l_money, x_money, money)
+def change(original_money, type_to_change, amount_to_set_to):
+    if type_to_change == "S":
+        x_money_new = original_money[3]
+        l_money_new = original_money[2]
+        m_money_new = original_money[1]
+        s_money_new = amount_to_set_to
+        money_reset(s_money_new, m_money_new, l_money_new, x_money_new, original_money)
+    elif type_to_change == "M":
+        x_money_new = original_money[3]
+        l_money_new = original_money[2]
+        m_money_new = amount_to_set_to
+        s_money_new = original_money[0]
+        money_reset(s_money_new, m_money_new, l_money_new, x_money_new, original_money)
+    elif type_to_change == "L":
+        x_money_new = original_money[3]
+        l_money_new = amount_to_set_to
+        m_money_new = original_money[1]
+        s_money_new = original_money[0]
+        money_reset(s_money_new, m_money_new, l_money_new, x_money_new, original_money)
+    elif type_to_change == "X":
+        x_money_new = amount_to_set_to
+        l_money_new = original_money[2]
+        m_money_new = original_money[1]
+        s_money_new = original_money[0]
+        money_reset(s_money_new, m_money_new, l_money_new, x_money_new, original_money)
     else:
         print("Error - money type not recognised. Use capital S,M,L or X only for type veriable")
-        return money
+        return original_money
 
 
 # loading money
@@ -190,31 +190,31 @@ global inventry
 inventry = []
 
 
-def amount(items, item_no):
+def amount(items_values, item_num):
     ret = None
-    if items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][11] == 0:
-        ret = items[item_no][12]
-    elif items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][12] == 0:
-        ret = items[item_no][11]
-    elif items[item_no][9] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-        ret = items[item_no][10]
-    elif items[item_no][10] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-        ret = items[item_no][9]
+    if items_values[item_num][9] == 0 and items_values[item_num][10] == 0 and items_values[item_num][11] == 0:
+        ret = items_values[item_num][12]
+    elif items_values[item_num][9] == 0 and items_values[item_num][10] == 0 and items_values[item_num][12] == 0:
+        ret = items_values[item_num][11]
+    elif items_values[item_num][9] == 0 and items_values[item_num][11] == 0 and items_values[item_num][12] == 0:
+        ret = items_values[item_num][10]
+    elif items_values[item_num][10] == 0 and items_values[item_num][11] == 0 and items_values[item_num][12] == 0:
+        ret = items_values[item_num][9]
     return ret
 
 
-def places(items, item_no):
-    if items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][11] == 0:
-        place = "X"
-    elif items[item_no][9] == 0 and items[item_no][10] == 0 and items[item_no][12] == 0:
-        place = "L"
-    elif items[item_no][9] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-        place = "M"
-    elif items[item_no][10] == 0 and items[item_no][11] == 0 and items[item_no][12] == 0:
-        place = "S"
+def places(items_values, item_num):
+    if items_values[item_num][9] == 0 and items_values[item_num][10] == 0 and items_values[item_num][11] == 0:
+        placement = "X"
+    elif items_values[item_num][9] == 0 and items_values[item_num][10] == 0 and items_values[item_num][12] == 0:
+        placement = "L"
+    elif items_values[item_num][9] == 0 and items_values[item_num][11] == 0 and items_values[item_num][12] == 0:
+        placement = "M"
+    elif items_values[item_num][10] == 0 and items_values[item_num][11] == 0 and items_values[item_num][12] == 0:
+        placement = "S"
     else:
-        place = "error"
-    return place
+        placement = "error"
+    return placement
 
 
 # ---------------------------------------------------------------------------------------------------
@@ -282,23 +282,23 @@ def drop_item(obj):
 
 
 # Function for equipping an item e.g Sword into your hand/Put on armour
-def equip_item(obj, name, pequip):
+def equip_item(obj, name, player_equip):
     global armour, weapons
     if obj == 0:
         weapons = name
         # Enter Addition To Stats (Waiting for finished weapons)
         print(currentHandItemMessage + str(name) + ".")
-        file = open(os.path.join("Saves", save_game_to_use), "equip0.txt", "w")
-        file.write(str(pequip))
-        file.close()
+        save_file = open(os.path.join("Saves", save_game_to_use), "equip0.txt", "w")
+        save_file.write(str(player_equip))
+        save_file.close()
         return weapons
     elif obj == 1:
         armour = name
         # endurance += int(armour[1])
         print(currentArmourMessage + str(name) + ".")
-        file = open(os.path.join("Saves", save_game_to_use, "equip1.txt"), "w")
-        file.write(str(pequip))
-        file.close()
+        save_file = open(os.path.join("Saves", save_game_to_use, "equip1.txt"), "w")
+        save_file.write(str(player_equip))
+        save_file.close()
         return armour
     elif obj == 2:
         print("clothing is not yet supported")
@@ -345,10 +345,10 @@ def unequip(temp):
     return decide, pdecide
 
 
-def item_to_eqip(length):
+def item_to_eqip(item_length):
     global decide
-    print(length)
-    equip_item(inventry[length][6], inventry[length][4], length)
+    print(item_length)
+    equip_item(inventry[item_length][6], inventry[item_length][4], item_length)
     decide = 1
     return decide
 
@@ -411,17 +411,17 @@ def pinventory():
 
 # --------------------------------------------------------------------------------------------------------------------------
 def save_item(to_write):
-    file = open("items.txt", "a")
-    file.write(to_write)
-    file.write("\n")
-    file.close()
-    file = open("amount.txt", "r")
-    amount = int(file.readline())
-    file.close()
-    file = open("amount.txt", "w")
-    amount = int(amount) + 1
-    file.write(str(amount))
-    file.close()
+    items_file = open("items.txt", "a")
+    items_file.write(to_write)
+    items_file.write("\n")
+    items_file.close()
+    amount_file = open("amount.txt", "r")
+    amount_to_save = int(items_file.readline())
+    amount_file.close()
+    amount_file = open("amount.txt", "w")
+    amount_to_save = int(amount_to_save) + 1
+    amount_file.write(str(amount_to_save))
+    amount_file.close()
 
 
 # strengthm(0),endurancem(1),dexm(2),spellm(3),name(4),class(5),type(6),description(7),range(8),costs(9),costm(10),costl(11),costx(12)
@@ -938,10 +938,10 @@ while 1 > 0:
         pygame.display.flip()
 
     elif instruction == "\\+money":
-        type = input("Small, Medium, Large or Special")
+        money_type = input("Small, Medium, Large or Special")
         amount = int(input("How much?"))
-        if type == "S" or type == "M" or type == "L" or type == "X":
-            change(money, type, amount)
+        if money_type == "S" or money_type == "M" or money_type == "L" or money_type == "X":
+            change(money, money_type, amount)
         else:
             print("Enter capital: S,M,L or X only")
     elif instruction == "\\shop":
@@ -959,13 +959,13 @@ while 1 > 0:
             if int(to_buy) <= int(length):  # check number isnt too big
                 print("You have attempted to buy " + str(items[int(to_buy)][4]))
                 price = (store[1][int(to_buy)])
-                type = store[2][int(to_buy)]
+                money_type = store[2][int(to_buy)]
                 if store[2][int(to_buy)] == "S":
                     amount = money[0] - int(price)
                     if amount < 0:
                         print("You cannot afford that")
                     else:
-                        change(money, type, amount)
+                        change(money, money_type, amount)
                         inventry.append(items[int(to_buy)])
                         save_item(to_buy)
                         file = open("money_s.txt", "w")
@@ -977,7 +977,7 @@ while 1 > 0:
                     if amount < 0:
                         print("You cannot afford that")
                     else:
-                        change(money, type, amount)
+                        change(money, money_type, amount)
                         inventry.append(items[int(to_buy)])
                         save_item(to_buy)
                         file = open("money_m.txt", "w")
@@ -989,7 +989,7 @@ while 1 > 0:
                     if amount < 0:
                         print("You cannot afford that")
                     else:
-                        change(money, type, amount)
+                        change(money, money_type, amount)
                         inventry.append(items[int(to_buy)])
                         save_item(to_buy)
                         file = open("money_l.txt", "w")
@@ -1001,7 +1001,7 @@ while 1 > 0:
                     if amount < 0:
                         print("You cannot afford that")
                     else:
-                        change(money, type, amount)
+                        change(money, money_type, amount)
                         inventry.append(items[int(to_buy)])
                         save_item(to_buy)
                         file = open("money_x.txt", "w")
